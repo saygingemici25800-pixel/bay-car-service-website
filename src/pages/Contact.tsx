@@ -33,12 +33,12 @@ export default function Contact() {
       </section>
 
       {/* Locations */}
-      <section className="py-20 w-full max-w-7xl mx-auto px-6">
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <section className="py-20 w-full max-w-3xl mx-auto px-6">
+         <div className="flex flex-col gap-10">
             <motion.div {...fadeInUp} className="bg-white p-10 md:p-12 rounded-[2rem] border border-ink/10 shadow-sm flex flex-col justify-between">
                <div>
-                  <h2 className="text-3xl font-bold text-ink mb-2" style={{ fontFamily: 'var(--font-display)' }}>Ana Atölye</h2>
-                  <p className="text-ink/60 font-medium mb-10">Bay Car Service — Alman Grubu Özel Servis</p>
+                  <h2 className="text-3xl font-bold text-ink mb-2" style={{ fontFamily: 'var(--font-display)' }}>Bay Car Service</h2>
+                  <p className="text-ink/60 font-medium mb-10">Alman Grubu Özel Servis</p>
                   
                   <div className="mb-10 text-lg">
                     <p className="text-ink mb-2">Taşyaka Mah. Sanayi Sitesi,<br/>Şht. Fethi Bey Cad. No: 47/B<br/>Fethiye / Muğla</p>
@@ -53,38 +53,6 @@ export default function Contact() {
                     <div className="flex justify-between items-center">
                        <span className="font-bold text-ink text-opacity-50">Pazar</span>
                        <span className="text-[var(--color-alert)] font-medium text-sm">Kapalı (acil için ara)</span>
-                    </div>
-                  </div>
-               </div>
-               
-               <div className="flex flex-col gap-3">
-                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="bg-ink text-surface text-center font-bold py-4 rounded-xl hover:bg-accent transition shadow-lg w-full" aria-label="Google Maps'te Aç">
-                   Google Maps'te Aç
-                 </a>
-                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="border border-ink/20 text-ink text-center font-bold py-4 rounded-xl hover:bg-surface transition w-full" aria-label="Yol Tarifi Al">
-                   Yol Tarifi Al
-                 </a>
-               </div>
-            </motion.div>
-
-            <motion.div {...fadeInUp} transition={{ delay: 0.1 }} className="bg-white p-10 md:p-12 rounded-[2rem] border border-ink/10 shadow-sm flex flex-col justify-between">
-               <div>
-                  <h2 className="text-3xl font-bold text-ink mb-2" style={{ fontFamily: 'var(--font-display)' }}>Teknik Servis & Aksesuar</h2>
-                  <p className="text-ink/60 font-medium mb-10">Hızlı diagnoz, küçük tamir, aksesuar satışı</p>
-                  
-                  <div className="mb-10 text-lg">
-                    <p className="text-ink mb-2">Çarşı Cad. 501. Sk.,<br/>Arıkaya Pasajı No: 21<br/>Fethiye / Muğla</p>
-                    <p className="text-mute text-base">Fethiye merkez, çarşı içi</p>
-                  </div>
-
-                  <div className="bg-surface/50 p-6 rounded-2xl border border-ink/5 mb-10">
-                    <div className="flex justify-between items-center border-b border-ink/10 pb-3 mb-3">
-                       <span className="font-bold text-ink">Pzt - Cmt</span>
-                       <span className="text-mute font-medium">08:00 - 20:00</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                       <span className="font-bold text-ink text-opacity-50">Pazar</span>
-                       <span className="text-[var(--color-alert)] font-medium text-sm">Kapalı</span>
                     </div>
                   </div>
                </div>

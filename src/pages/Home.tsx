@@ -224,36 +224,20 @@ export default function Home() {
           >
             Bizi ziyaret edin
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="max-w-2xl mx-auto mb-12">
             <motion.div 
               {...fadeInUp}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="bg-white p-8 md:p-10 rounded-2xl border border-ink/10 flex flex-col justify-between items-start group"
             >
               <div>
-                <h3 className="text-2xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Ana Atölye</h3>
+                <h3 className="text-2xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Bay Car Service</h3>
                 <p className="text-ink mb-2 max-w-sm leading-relaxed">
                   Taşyaka Mah. Sanayi Sitesi, Şht. Fethi Bey Cad. No: 47/B, Fethiye/Muğla
                 </p>
                 <p className="text-mute text-sm mb-12">Ölüdeniz yolu üzeri, kanal köprüsü yanı</p>
               </div>
               <a href="#" className="text-accent font-medium group-hover:text-ink transition border-b border-accent group-hover:border-ink pb-0.5 inline-block">
-                Yol Tarifi Al →
-              </a>
-            </motion.div>
-            
-            <motion.div 
-              {...fadeInUp}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white p-8 md:p-10 rounded-2xl border border-ink/10 flex flex-col justify-between items-start group"
-            >
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Teknik Servis & Aksesuar</h3>
-                <p className="text-ink mb-12 max-w-sm leading-relaxed">
-                  Çarşı Cad. 501. Sk., Arıkaya Pasajı No: 21, Fethiye
-                </p>
-              </div>
-              <a href="#" className="text-accent font-medium group-hover:text-ink transition border-b border-accent group-hover:border-ink pb-0.5 mt-auto inline-block">
                 Yol Tarifi Al →
               </a>
             </motion.div>

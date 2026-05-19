@@ -51,7 +51,7 @@ export default function About() {
                   Bayram Öğütveren, motor işine mutfağından başladı. Bosch Car Service eğitimlerini tamamlayıp yıllarca yetkili servis tezgahlarında marka standartlarını öğrendi. "Servis" demek, onun için önce parçayı, sonra sistemi anlamak demek oldu. En sonunda yetkili servis tecrübesini Fethiye'de kendi çatısı altında topladı.
                 </p>
                 <p>
-                  Bugün Bay Car Service iki farklı lokasyonda hizmet veriyor. Taşyaka'da ağır mekanik ve diagnoz işlemleri yürüten ana atölye, Çarşı'da ise hızlı teknik onarımlar ve aksesuar değişimi sağlayan ikinci merkezimiz var. Mercedes, BMW, Audi, VW ve Porsche araçların spesifik sistemlerine uygun en güncel diagnoz araçlarına sahibiz.
+                  Bugün Taşyaka'da, Fethiye'nin sanayi bölgesinde. Mercedes/BMW/Audi/VW/Porsche için tam donanım. Mercedes, BMW, Audi, VW ve Porsche araçların spesifik sistemlerine uygun en güncel diagnoz araçlarına sahibiz.
                 </p>
                 <p className="font-medium text-ink bg-white/50 p-6 rounded-xl border border-ink/5 relative italic">
                   "İşimiz markalara saygı. Bir aracın yetkili servis dışında bu kadar özenle ele alındığını gördüğünüzde, fark hemen anlaşılır."
@@ -105,14 +105,14 @@ export default function About() {
 
       {/* 4. Locations */}
       <section className="py-24 bg-surface w-full">
-        <div className="max-w-7xl mx-auto px-6">
-           <motion.h2 {...fadeInUp} className="text-4xl md:text-5xl font-bold text-ink mb-16" style={{ fontFamily: 'var(--font-display)' }}>
-              İki lokasyon, tek kalite
+        <div className="max-w-2xl mx-auto px-6">
+           <motion.h2 {...fadeInUp} className="text-4xl md:text-5xl font-bold text-ink mb-16 text-center" style={{ fontFamily: 'var(--font-display)' }}>
+              Atölyemiz
            </motion.h2>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+           <div className="flex flex-col gap-8">
               <motion.div {...fadeInUp} transition={{ duration: 0.6, delay: 0.1 }} className="bg-white p-10 rounded-2xl border border-ink/10 shadow-sm flex flex-col justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Ana Atölye — Taşyaka</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Bay Car Service</h3>
                   <p className="text-ink/80 mb-6">Taşyaka Mah. Sanayi Sitesi, Şht. Fethi Bey Cad. No: 47/B, Fethiye</p>
                   
                   <h4 className="font-bold text-sm text-mute uppercase tracking-widest mb-3">Hizmetler</h4>
@@ -121,24 +121,6 @@ export default function About() {
                     <li>Otomatik / Manuel şanzıman</li>
                     <li>Fren ve süspansiyon sistemleri</li>
                     <li>Ağır elektronik diagnoz</li>
-                  </ul>
-                </div>
-                <div className="pt-6 border-t border-ink/10">
-                  <p className="text-sm font-bold text-mute">Pzt - Cmt | 08:00 - 20:00</p>
-                </div>
-              </motion.div>
-
-              <motion.div {...fadeInUp} transition={{ duration: 0.6, delay: 0.2 }} className="bg-white p-10 rounded-2xl border border-ink/10 shadow-sm flex flex-col justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Teknik Servis — Çarşı</h3>
-                  <p className="text-ink/80 mb-6">Çarşı Cad. 501. Sk., Arıkaya Pasajı No: 21, Fethiye</p>
-                  
-                  <h4 className="font-bold text-sm text-mute uppercase tracking-widest mb-3">Hizmetler</h4>
-                  <ul className="space-y-2 text-ink/80 font-medium mb-8">
-                    <li>Hızlı diyagnostik test</li>
-                    <li>Aksesuar montaj ve değişim</li>
-                    <li>Periyodik bakım ürünleri</li>
-                    <li>Küçük onarım hizmetleri</li>
                   </ul>
                 </div>
                 <div className="pt-6 border-t border-ink/10">

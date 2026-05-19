@@ -4,23 +4,14 @@ export const businessSchema = {
   "name": "Bay Car Service",
   "description": "Mercedes-Benz, BMW, Audi, Volkswagen, Porsche özel servisi. Bosch sertifikalı uzman kadro. Fethiye/Muğla.",
   "telephone": "+905346682445",
-  "address": [
-    {
-      "@type": "PostalAddress",
-      "streetAddress": "Taşyaka Mah. Sanayi Sitesi, Şht. Fethi Bey Cad. No: 47/B",
-      "addressLocality": "Fethiye",
-      "addressRegion": "Muğla",
-      "postalCode": "48300",
-      "addressCountry": "TR"
-    },
-    {
-      "@type": "PostalAddress", 
-      "streetAddress": "Çarşı Cad. 501. Sk., Arıkaya Pasajı No: 21",
-      "addressLocality": "Fethiye",
-      "addressRegion": "Muğla",
-      "addressCountry": "TR"
-    }
-  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Taşyaka Mah. Sanayi Sitesi, Şht. Fethi Bey Cad. No: 47/B",
+    "addressLocality": "Fethiye",
+    "addressRegion": "Muğla",
+    "postalCode": "48300",
+    "addressCountry": "TR"
+  },
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
