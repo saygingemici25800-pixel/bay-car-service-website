@@ -47,28 +47,25 @@ function Header() {
       <header 
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled 
-            ? 'bg-surface/95 backdrop-blur-md border-b border-ink/10 shadow-sm py-4' 
-            : 'bg-transparent py-6'
+            ? 'bg-surface/90 backdrop-blur-lg border-b border-ink/10 shadow-sm py-4' 
+            : 'bg-transparent py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link to="/" className="z-50 relative">
             <div className={`inline-block relative ${(!scrolled && location.pathname === '/hakkimizda') ? 'text-surface' : 'text-ink'}`}>
-              <h1 className="text-xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
-                BAY CAR SERVICE
+              <h1 className="text-2xl font-bold tracking-[0.2em]" style={{ fontFamily: 'var(--font-display)' }}>
+                BAY·CAR
               </h1>
-              <p className={`text-[10px] uppercase tracking-widest mt-0.5 font-bold ${(!scrolled && location.pathname === '/hakkimizda') ? 'text-surface/80' : 'text-mute'}`}>
-                Fethiye Özel Servis
-              </p>
             </div>
           </Link>
           
-          <nav className={`hidden md:flex items-center gap-8 text-sm font-medium ${(!scrolled && location.pathname === '/hakkimizda') ? 'text-surface/90' : 'text-ink'}`}>
-            <Link to="/servisler" className={`${location.pathname.startsWith('/servisler') ? 'text-accent underline underline-offset-4 decoration-2' : 'hover:text-accent transition'}`}>Servisler</Link>
-            <Link to="/hakkimizda" className={`${location.pathname === '/hakkimizda' ? 'text-accent underline underline-offset-4 decoration-2' : 'hover:text-accent transition'}`}>Hakkımızda</Link>
-            <Link to="/galeri" className={`${location.pathname === '/galeri' ? 'text-accent underline underline-offset-4 decoration-2' : 'hover:text-accent transition'}`}>Galeri</Link>
-            <Link to="/yorumlar" className={`${location.pathname === '/yorumlar' ? 'text-accent underline underline-offset-4 decoration-2' : 'hover:text-accent transition'}`}>Yorumlar</Link>
-            <Link to="/iletisim" className={`${location.pathname === '/iletisim' ? 'text-accent underline underline-offset-4 decoration-2' : 'hover:text-accent transition'}`}>İletişim</Link>
+          <nav className={`hidden md:flex items-center gap-8 text-[11px] uppercase tracking-widest font-mono font-bold ${(!scrolled && location.pathname === '/hakkimizda') ? 'text-surface/90' : 'text-ink'}`}>
+            <Link to="/servisler" className={`${location.pathname.startsWith('/servisler') ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Servisler</Link>
+            <Link to="/hakkimizda" className={`${location.pathname === '/hakkimizda' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Hakkımızda</Link>
+            <Link to="/galeri" className={`${location.pathname === '/galeri' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Galeri</Link>
+            <Link to="/yorumlar" className={`${location.pathname === '/yorumlar' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Yorumlar</Link>
+            <Link to="/iletisim" className={`${location.pathname === '/iletisim' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>İletişim</Link>
           </nav>
 
           <div className="hidden md:block">

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { brands } from '../lib/brands'
 import { businessSchema } from '../lib/seo'
-// import HeroScene from '../components/HeroScene'
+import MarqueeBrands from '../components/MarqueeBrands'
+import StatsSection from '../components/StatsSection'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -49,82 +50,138 @@ export default function Home() {
         </script>
       </Helmet>
 
-      {/* 1. HERO SECTION */}
-      <section className="relative w-full overflow-hidden min-h-[85vh] flex items-center">
-        {/* Background subtle radial gradient */}
-        <div className="absolute inset-0 pointer-events-none z-0" style={{
-          background: 'radial-gradient(circle at 75% 40%, rgba(0,58,135,0.06) 0%, transparent 60%)'
-        }} />
-
-        {/* <HeroScene /> */}
-        
-        {/* 3D Model Placeholder */}
-        <div className="absolute top-1/2 -translate-y-1/2 right-[5%] w-[40%] md:h-[60vh] hidden md:flex flex-col items-center justify-center bg-ink rounded-3xl border border-white/5 shadow-2xl z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-          <div className="text-surface/60 font-mono text-lg tracking-[0.2em] text-center flex flex-col gap-5 relative z-10">
-            <span className="text-surface/80 font-bold mb-4 text-[10px] tracking-widest border border-surface/20 px-3 py-1 rounded-full w-max mx-auto">3D MODEL PLACEHOLDER</span>
-            <span className="hover:text-surface transition duration-300">MERCEDES</span>
-            <span className="hover:text-surface transition duration-300">BMW</span>
-            <span className="hover:text-surface transition duration-300">AUDI</span>
-            <span className="hover:text-surface transition duration-300">VW</span>
-            <span className="hover:text-surface transition duration-300">PORSCHE</span>
-          </div>
+      {/* 1. HERO YENİDEN: ASYMETRİK KOMPOZİSYON */}
+      <section className="min-h-screen relative overflow-hidden bg-surface">
+        {/* Köşede dikey rotated marka adı */}
+        <div className="absolute top-32 right-8 hidden lg:block z-20">
+          <span 
+            className="text-mute uppercase tracking-[0.4em] text-xs font-mono"
+            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+          >
+            BAY · CAR · SERVICE · EST · 2010 · FETHIYE
+          </span>
         </div>
-
-        <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative z-10 w-full md:w-3/5">
-          <motion.p 
+        
+        {/* Üst köşe: küçük cesur ifade */}
+        <div className="absolute top-8 left-8 z-10">
+          <p className="text-xs font-mono uppercase tracking-widest text-mute">
+            <span className="text-accent">●</span> Fethiye Taşyaka · Şu an açık
+          </p>
+        </div>
+        
+        {/* 12-column grid container */}
+        <div className="grid grid-cols-12 gap-4 px-6 md:px-12 pt-40 pb-24 relative">
+          
+          {/* SOL ALT: küçük kicker (col 1-3) */}
+          <div className="col-span-12 md:col-span-3 md:col-start-1 md:row-start-1 mt-8">
+            <p className="text-xs uppercase tracking-widest text-mute font-mono">
+              — Özel servis<br/>
+              — Yol yardım<br/>
+              — Bosch sertifika
+            </p>
+          </div>
+          
+          {/* MERKEZ: dev başlık (col 1-9) — asymetrik */}
+          <div className="col-span-12 md:col-span-9 md:col-start-2 md:row-start-1">
+            <h1 
+              className="font-bold leading-[0.95] tracking-tight"
+              style={{ 
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(3rem, 11vw, 11rem)'
+              }}
+            >
+              <motion.span 
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                className="block"
+              >
+                Bayram
+              </motion.span>
+              <motion.span 
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                className="block md:pl-[20%] italic font-normal text-accent"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                Usta'nın
+              </motion.span>
+              <motion.span 
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                className="block"
+              >
+                atölyesi.
+              </motion.span>
+            </h1>
+          </div>
+          
+          {/* SAĞ ALT (col 9-12): meta info kart */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="col-span-12 md:col-span-4 md:col-start-9 md:row-start-2 mt-12 md:mt-8"
+          >
+            <div className="border-l-2 border-ink pl-6">
+              <p className="text-sm text-ink leading-relaxed mb-4">
+                12 yıldır Fethiye'de. Mercedes, BMW, Audi, Volkswagen, 
+                Porsche için <span className="font-bold">tek atölye</span>.
+              </p>
+              <div className="flex flex-col gap-3 mt-6">
+                <Link 
+                  to="/randevu"
+                  className="group inline-flex items-center gap-3 text-ink hover:text-accent transition"
+                >
+                  <span className="w-12 h-px bg-ink group-hover:w-20 transition-all duration-500"></span>
+                  <span className="text-sm uppercase tracking-widest font-mono">
+                    Randevu al
+                  </span>
+                </Link>
+                <a 
+                  href="tel:+905346682445"
+                  className="group inline-flex items-center gap-3 text-ink hover:text-alert transition"
+                >
+                  <span className="w-12 h-px bg-ink group-hover:w-20 transition-all duration-500"></span>
+                  <span className="text-sm uppercase tracking-widest font-mono">
+                    Acil yol yardım
+                  </span>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* SOL ALT 2 (col 1-6): büyük tipografi notu */}
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-mute uppercase tracking-widest text-xs mb-6 font-medium"
+            transition={{ duration: 1, delay: 0.9 }}
+            className="col-span-12 md:col-span-6 md:col-start-1 md:row-start-2 mt-8 md:mt-8"
           >
-            Mercedes · BMW · Audi · Volkswagen · Porsche
-          </motion.p>
-          <h2
-            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] max-w-4xl flex flex-col"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            <motion.span 
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-              className="block"
+            <p 
+              className="text-lg md:text-xl text-ink leading-relaxed"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
-              Alman mühendisliği.
-            </motion.span>
-            <motion.span 
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-              className="block text-accent"
-            >
-              Akdeniz güveni.
-            </motion.span>
-          </h2>
-          <p className="text-lg text-mute mt-8 max-w-xl">
-            Fethiye Taşyaka'da, Bosch sertifikalı uzman kadromuzla
-            premium Alman grubu araçlarına özel servis.
-          </p>
-          <div className="flex gap-4 mt-10">
-            <Link to="/randevu" className="bg-ink text-surface px-6 py-3 rounded-lg font-medium hover:bg-accent hover:text-white transition inline-block">
-              Randevu Al
-            </Link>
-            <Link to="/acil" className="border border-ink text-ink px-6 py-3 rounded-lg font-medium hover:bg-ink hover:text-surface transition inline-block">
-              Acil Yol Yardım
-            </Link>
-          </div>
+              Yetkili servis kalitesi.<br/>
+              <span className="text-mute italic">Sanayi fiyatı.</span>
+            </p>
+          </motion.div>
+          
         </div>
       </section>
+
+      <MarqueeBrands />
+      <StatsSection />
 
       {/* 2. BRAND GRID SECTION */}
       <section id="brands" className="py-24 bg-surface max-w-7xl mx-auto px-6 w-full">
         <motion.div {...fadeInUp}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>
-            Markamız bizim için özel
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-ink leading-[0.95]" style={{ fontFamily: 'var(--font-display)' }}>
+             Beş marka.<br/>
+             <span className="text-mute italic font-normal text-3xl md:text-4xl">Tek uzmanlık.</span>
           </h2>
-          <p className="text-lg text-mute mb-12">
-            5 marka. Tek atölye. Bosch sertifikalı uzmanlık.
-          </p>
         </motion.div>
         
         <motion.div variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-50px" }} className="grid grid-cols-2 md:grid-cols-5 gap-4">
