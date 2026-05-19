@@ -40,7 +40,7 @@ export default function Appointment() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
       className="w-full flex flex-col items-center bg-surface min-h-[85vh] py-20 px-6"
     >
       <Helmet>

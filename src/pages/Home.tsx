@@ -6,10 +6,30 @@ import { businessSchema } from '../lib/seo'
 // import HeroScene from '../components/HeroScene'
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 60 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 }
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+}
+
+const staggerContainer = {
+  initial: {},
+  whileInView: {
+    transition: {
+      staggerChildren: 0.12
+    }
+  },
+  viewport: { once: true, margin: "-50px" }
+}
+
+const cardVariant = {
+  initial: { opacity: 0, y: 40, scale: 0.95 },
+  whileInView: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+  }
 }
 
 export default function Home() {
@@ -18,7 +38,7 @@ export default function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
       className="w-full flex flex-col"
     >
       <Helmet>
@@ -52,15 +72,34 @@ export default function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative z-10 w-full md:w-3/5">
-          <p className="text-mute uppercase tracking-widest text-xs mb-6 font-medium">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-mute uppercase tracking-widest text-xs mb-6 font-medium"
+          >
             Mercedes · BMW · Audi · Volkswagen · Porsche
-          </p>
+          </motion.p>
           <h2
-            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] max-w-4xl"
+            className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] max-w-4xl flex flex-col"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Alman mühendisliği.<br />
-            <span className="text-accent">Akdeniz güveni.</span>
+            <motion.span 
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+              className="block"
+            >
+              Alman mühendisliği.
+            </motion.span>
+            <motion.span 
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+              className="block text-accent"
+            >
+              Akdeniz güveni.
+            </motion.span>
           </h2>
           <p className="text-lg text-mute mt-8 max-w-xl">
             Fethiye Taşyaka'da, Bosch sertifikalı uzman kadromuzla
@@ -88,14 +127,11 @@ export default function Home() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {Object.values(brands).map((brand, i) => (
+        <motion.div variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-50px" }} className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          {Object.values(brands).map((brand) => (
             <Link to={`/servisler/${brand.slug}`} key={brand.slug} className="group/brand">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                variants={cardVariant}
                 className="bg-white p-6 rounded-xl border border-ink/10 group-hover/brand:border-accent group-hover/brand:scale-105 transition duration-300 flex flex-col justify-between aspect-square relative"
               >
                 <div>
@@ -109,7 +145,7 @@ export default function Home() {
               </motion.div>
             </Link>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* 3. WHY US SECTION */}

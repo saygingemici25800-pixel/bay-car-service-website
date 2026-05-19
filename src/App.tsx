@@ -45,7 +45,7 @@ function Header() {
   return (
     <>
       <header 
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled 
             ? 'bg-surface/95 backdrop-blur-md border-b border-ink/10 shadow-sm py-4' 
             : 'bg-transparent py-6'

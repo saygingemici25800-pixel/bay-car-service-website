@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 60 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 }
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
 }
 
 export default function Gallery() {
@@ -30,7 +30,7 @@ export default function Gallery() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
       className="w-full bg-surface"
     >
       <Helmet>

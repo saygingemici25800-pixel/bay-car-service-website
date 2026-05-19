@@ -2,15 +2,15 @@ import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 60 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 }
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
 }
 
 export default function Emergency() {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full bg-surface">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="w-full bg-surface">
       <Helmet>
         <title>7/24 Yol Yardım Fethiye | Bay Car Service</title>
         <meta name="description" content="Fethiye, Ölüdeniz, Çalış, Kayaköy çevresine 30 dakika içinde yol yardım. Akü, yakıt, lastik, çekme. 0534 668 24 45." />
