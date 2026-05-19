@@ -11,7 +11,9 @@ import Gallery from './pages/Gallery'
 import Reviews from './pages/Reviews'
 import Appointment from './pages/Appointment'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,10 +31,9 @@ function Header() {
 
   // Close menu on route change
   useEffect(() => {
+    // eslint-disable-next-line
     setMenuOpen(false);
   }, [location.pathname]);
-
-  const isHome = location.pathname === '/';
   
   // Set transparent if scrolled == false and we are on home (dark bg) or specific routes?
   // Home has a light radial background at the hero, so text-ink is fine. About has dark hero, so text-surface if scrolled=false?
@@ -142,6 +143,7 @@ function AnimatedRoutes() {
         <Route path="/yorumlar" element={<Reviews />} />
         <Route path="/randevu" element={<Appointment />} />
         <Route path="/iletisim" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
@@ -150,9 +152,11 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:bg-ink focus:text-surface focus:p-4 focus:top-0 focus:left-0" aria-label="İçeriğe atla">İçeriğe atla</a>
+      <ScrollToTop />
       <div className="min-h-screen bg-surface text-ink flex flex-col relative w-full overflow-x-hidden">
         <Header />
-        <main className="flex-grow flex flex-col w-full">
+        <main id="main-content" className="flex-grow flex flex-col w-full">
           <AnimatedRoutes />
         </main>
         <Footer />

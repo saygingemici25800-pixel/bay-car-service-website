@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { brands } from '../lib/brands'
+import { businessSchema } from '../lib/seo'
 // import HeroScene from '../components/HeroScene'
 
 const fadeInUp = {
@@ -19,6 +21,14 @@ export default function Home() {
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className="w-full flex flex-col"
     >
+      <Helmet>
+        <title>Bay Car Service Fethiye | Mercedes BMW Audi VW Porsche Özel Servisi</title>
+        <meta name="description" content="Fethiye Taşyaka'da Bosch sertifikalı Alman grubu özel servis. Mercedes, BMW, Audi, Volkswagen, Porsche. 7/24 yol yardım. 0534 668 24 45." />
+        <script type="application/ld+json">
+          {JSON.stringify(businessSchema)}
+        </script>
+      </Helmet>
+
       {/* 1. HERO SECTION */}
       <section className="relative w-full overflow-hidden min-h-[85vh] flex items-center">
         {/* Background subtle radial gradient */}

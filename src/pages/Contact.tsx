@@ -1,16 +1,141 @@
 import { motion } from 'framer-motion'
+import { Helmet } from 'react-helmet-async'
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 }
+}
 
 export default function Contact() {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
-      className="max-w-7xl mx-auto px-6 py-24"
-    >
-      <h1 className="text-4xl font-bold">İletişim</h1>
-      <p className="text-mute mt-4">Bu sayfa yakında.</p>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full bg-surface">
+      <Helmet>
+        <title>İletişim | Bay Car Service Fethiye</title>
+        <meta name="description" content="Bay Car Service iletişim bilgileri. Fethiye Taşyaka Sanayi Sitesi ve Çarşı adreslerimiz. Bize hemen ulaşın: 0534 668 24 45." />
+      </Helmet>
+
+      {/* Hero */}
+      <section className="pt-40 pb-20 px-6 text-center w-full bg-surface">
+         <motion.h1 
+           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+           className="text-5xl md:text-6xl font-bold text-ink mb-6 tracking-tight" style={{ fontFamily: 'var(--font-display)' }}
+         >
+           İletişim
+         </motion.h1>
+         <motion.p 
+           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+           className="text-xl text-mute max-w-lg mx-auto font-medium"
+         >
+           Ya gelin, ya arayın. Cevap aynı: olur.
+         </motion.p>
+      </section>
+
+      {/* Locations */}
+      <section className="py-20 w-full max-w-7xl mx-auto px-6">
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <motion.div {...fadeInUp} className="bg-white p-10 md:p-12 rounded-[2rem] border border-ink/10 shadow-sm flex flex-col justify-between">
+               <div>
+                  <h2 className="text-3xl font-bold text-ink mb-2" style={{ fontFamily: 'var(--font-display)' }}>Ana Atölye</h2>
+                  <p className="text-ink/60 font-medium mb-10">Bay Car Service — Alman Grubu Özel Servis</p>
+                  
+                  <div className="mb-10 text-lg">
+                    <p className="text-ink mb-2">Taşyaka Mah. Sanayi Sitesi,<br/>Şht. Fethi Bey Cad. No: 47/B<br/>Fethiye / Muğla</p>
+                    <p className="text-mute text-base">Ölüdeniz yolu üzeri, kanal köprüsü yanı</p>
+                  </div>
+
+                  <div className="bg-surface/50 p-6 rounded-2xl border border-ink/5 mb-10">
+                    <div className="flex justify-between items-center border-b border-ink/10 pb-3 mb-3">
+                       <span className="font-bold text-ink">Pzt - Cmt</span>
+                       <span className="text-mute font-medium">08:00 - 20:00</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                       <span className="font-bold text-ink text-opacity-50">Pazar</span>
+                       <span className="text-[var(--color-alert)] font-medium text-sm">Kapalı (acil için ara)</span>
+                    </div>
+                  </div>
+               </div>
+               
+               <div className="flex flex-col gap-3">
+                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="bg-ink text-surface text-center font-bold py-4 rounded-xl hover:bg-accent transition shadow-lg w-full" aria-label="Google Maps'te Aç">
+                   Google Maps'te Aç
+                 </a>
+                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="border border-ink/20 text-ink text-center font-bold py-4 rounded-xl hover:bg-surface transition w-full" aria-label="Yol Tarifi Al">
+                   Yol Tarifi Al
+                 </a>
+               </div>
+            </motion.div>
+
+            <motion.div {...fadeInUp} transition={{ delay: 0.1 }} className="bg-white p-10 md:p-12 rounded-[2rem] border border-ink/10 shadow-sm flex flex-col justify-between">
+               <div>
+                  <h2 className="text-3xl font-bold text-ink mb-2" style={{ fontFamily: 'var(--font-display)' }}>Teknik Servis & Aksesuar</h2>
+                  <p className="text-ink/60 font-medium mb-10">Hızlı diagnoz, küçük tamir, aksesuar satışı</p>
+                  
+                  <div className="mb-10 text-lg">
+                    <p className="text-ink mb-2">Çarşı Cad. 501. Sk.,<br/>Arıkaya Pasajı No: 21<br/>Fethiye / Muğla</p>
+                    <p className="text-mute text-base">Fethiye merkez, çarşı içi</p>
+                  </div>
+
+                  <div className="bg-surface/50 p-6 rounded-2xl border border-ink/5 mb-10">
+                    <div className="flex justify-between items-center border-b border-ink/10 pb-3 mb-3">
+                       <span className="font-bold text-ink">Pzt - Cmt</span>
+                       <span className="text-mute font-medium">08:00 - 20:00</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                       <span className="font-bold text-ink text-opacity-50">Pazar</span>
+                       <span className="text-[var(--color-alert)] font-medium text-sm">Kapalı</span>
+                    </div>
+                  </div>
+               </div>
+               
+               <div className="flex flex-col gap-3">
+                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="bg-ink text-surface text-center font-bold py-4 rounded-xl hover:bg-accent transition shadow-lg w-full" aria-label="Google Maps'te Aç">
+                   Google Maps'te Aç
+                 </a>
+                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="border border-ink/20 text-ink text-center font-bold py-4 rounded-xl hover:bg-surface transition w-full" aria-label="Yol Tarifi Al">
+                   Yol Tarifi Al
+                 </a>
+               </div>
+            </motion.div>
+         </div>
+      </section>
+
+      {/* Direct Contact */}
+      <section className="py-24 bg-ink text-surface w-full mt-10">
+         <div className="max-w-7xl mx-auto px-6">
+            <motion.h2 {...fadeInUp} className="text-4xl font-bold mb-16 text-white" style={{ fontFamily: 'var(--font-display)' }}>Doğrudan ulaşın</motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+               <motion.div {...fadeInUp} transition={{ delay: 0.1 }} className="bg-white/5 border border-white/10 p-10 rounded-3xl hover:bg-white/10 transition duration-300">
+                  <h3 className="text-xl font-medium text-surface/60 mb-2">Telefon</h3>
+                  <a href="tel:+905346682445" className="text-3xl font-bold text-white hover:text-accent transition block mb-8" style={{ fontFamily: 'var(--font-display)' }}>0534 668 24 45</a>
+                  <p className="text-accent text-sm font-bold uppercase tracking-widest">7/24 YOL YARDIM</p>
+               </motion.div>
+               <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="bg-white/5 border border-white/10 p-10 rounded-3xl hover:bg-white/10 transition duration-300">
+                  <h3 className="text-xl font-medium text-surface/60 mb-2">WhatsApp</h3>
+                  <a href="https://wa.me/905346682445" target="_blank" rel="noopener noreferrer" className="text-3xl font-bold text-white hover:text-accent transition block mb-8" style={{ fontFamily: 'var(--font-display)' }}>0534 668 24 45</a>
+                  <p className="text-surface/40 text-sm font-bold uppercase tracking-widest">Mesaj yazın, hızlı dönüş</p>
+               </motion.div>
+               <motion.div {...fadeInUp} transition={{ delay: 0.3 }} className="bg-white/5 border border-white/10 p-10 rounded-3xl hover:bg-white/10 transition duration-300">
+                  <h3 className="text-xl font-medium text-surface/60 mb-2">E-posta</h3>
+                  <a href="mailto:info@baycarservice.com" className="text-2xl font-bold text-white hover:text-accent transition block mb-8" style={{ fontFamily: 'var(--font-display)' }}>info@baycarservice.com</a>
+                  <p className="text-surface/40 text-sm font-bold uppercase tracking-widest">Detaylı sorularınız için</p>
+               </motion.div>
+            </div>
+         </div>
+      </section>
+
+      {/* Map Placeholder */}
+      <section className="w-full h-[400px] bg-ink/5 flex items-center justify-center relative border-t border-ink/10">
+         {/* Mapbox veya Leaflet entegrasyonu gerçek koordinatlar geldiğinde eklenecek */}
+         <div className="text-center px-6">
+            <svg className="w-12 h-12 text-mute mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <p className="text-mute font-medium max-w-sm leading-relaxed">
+              Harita yakında. Şimdilik Google Maps'te <span className="font-bold text-ink">"Bay Car Service Fethiye"</span> diye arayabilirsiniz.
+            </p>
+         </div>
+      </section>
+
     </motion.div>
   )
 }
