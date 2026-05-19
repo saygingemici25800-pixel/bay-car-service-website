@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { brands } from '../lib/brands'
 // import HeroScene from '../components/HeroScene'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.6, ease: "easeOut" }
+  transition: { duration: 0.6 }
 }
 
 export default function Home() {
@@ -78,18 +79,25 @@ export default function Home() {
         </motion.div>
         
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {['Mercedes-Benz', 'BMW', 'Audi', 'Volkswagen', 'Porsche'].map((brand, i) => (
-            <motion.div 
-              key={brand}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-              className="bg-white p-6 rounded-xl border border-ink/10 hover:border-accent hover:scale-105 transition duration-300 flex flex-col justify-between aspect-square"
-            >
-              <h3 className="text-xl md:text-2xl font-bold text-ink" style={{ fontFamily: 'var(--font-display)' }}>{brand}</h3>
-              <p className="text-xs md:text-sm text-mute mt-4 font-medium uppercase tracking-wider">Özel servis</p>
-            </motion.div>
+          {Object.values(brands).map((brand, i) => (
+            <Link to={`/servisler/${brand.slug}`} key={brand.slug} className="group/brand">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white p-6 rounded-xl border border-ink/10 group-hover/brand:border-accent group-hover/brand:scale-105 transition duration-300 flex flex-col justify-between aspect-square relative"
+              >
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-ink" style={{ fontFamily: 'var(--font-display)' }}>{brand.name}</h3>
+                  <p className="text-xs md:text-sm text-mute mt-4 font-medium uppercase tracking-wider">Özel servis</p>
+                </div>
+                
+                <span className="text-accent underline text-sm mt-4 opacity-0 group-hover/brand:opacity-100 transition duration-300">
+                  Detay &rarr;
+                </span>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </section>
