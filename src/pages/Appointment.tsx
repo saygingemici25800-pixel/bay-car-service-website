@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { brands } from '../lib/brands';
@@ -24,6 +24,7 @@ export default function Appointment() {
   });
 
   const [error, setError] = useState('');
+  const [consent, setConsent] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,6 +36,10 @@ export default function Appointment() {
     // Validation: ad soyad ve telefon zorunlu
     if (!formData.name.trim() || !formData.phone.trim()) {
       setError('Lütfen ad soyad ve telefon alanlarını doldurun.');
+      return;
+    }
+    if (!consent) {
+      setError('Devam etmek için KVKK Aydınlatma Metni onayını işaretleyin.');
       return;
     }
     setError('');
@@ -131,6 +136,21 @@ export default function Appointment() {
                  <option value="Öğleden sonra 15:00-18:00">Öğleden Sonra 15:00 - 18:00</option>
                </select>
             </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              required
+              aria-required="true"
+              id="kvkk"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-1 h-4 w-4 shrink-0 accent-[var(--color-accent)] cursor-pointer"
+            />
+            <label htmlFor="kvkk" className="text-sm text-mute leading-relaxed cursor-pointer">
+              <Link to="/gizlilik" className="text-accent underline hover:text-ink transition">KVKK Aydınlatma Metni</Link>'ni okudum, kişisel verilerimin randevu talebim için işlenmesini onaylıyorum.
+            </label>
           </div>
 
           {error && (

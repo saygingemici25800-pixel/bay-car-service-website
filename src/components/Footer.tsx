@@ -64,6 +64,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="border-t border-surface/10 mt-24 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-surface/40 uppercase tracking-widest">
            <p>© 2026 Bay Car Service</p>
+           <Link to="/gizlilik" className="hover:text-surface/80 transition">Gizlilik / KVKK</Link>
            <p>
              <a href="#" className="hover:text-surface/80 transition">Tasarım: Saygın Kartal</a>
            </p>
