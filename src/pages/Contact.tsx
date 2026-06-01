@@ -58,10 +58,10 @@ export default function Contact() {
                </div>
                
                <div className="flex flex-col gap-3">
-                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="bg-ink text-surface text-center font-bold py-4 rounded-xl hover:bg-accent transition shadow-lg w-full" aria-label="Google Maps'te Aç">
+                 <a href="https://www.google.com/maps/search/Bay+Car+Service+Fethiye+Taşyaka" target="_blank" rel="noopener noreferrer" className="bg-ink text-surface text-center font-bold py-4 rounded-xl hover:bg-accent transition shadow-lg w-full" aria-label="Google Maps'te Aç">
                    Google Maps'te Aç
                  </a>
-                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="border border-ink/20 text-ink text-center font-bold py-4 rounded-xl hover:bg-surface transition w-full" aria-label="Yol Tarifi Al">
+                 <a href="https://www.google.com/maps/dir/?api=1&destination=Bay+Car+Service+Fethiye+Taşyaka" target="_blank" rel="noopener noreferrer" className="border border-ink/20 text-ink text-center font-bold py-4 rounded-xl hover:bg-surface transition w-full" aria-label="Yol Tarifi Al">
                    Yol Tarifi Al
                  </a>
                </div>
@@ -93,14 +93,21 @@ export default function Contact() {
          </div>
       </section>
 
-      {/* Map Placeholder */}
-      <section className="w-full h-[400px] bg-ink/5 flex items-center justify-center relative border-t border-ink/10">
-         {/* Mapbox veya Leaflet entegrasyonu gerçek koordinatlar geldiğinde eklenecek */}
-         <div className="text-center px-6">
-            <svg className="w-12 h-12 text-mute mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            <p className="text-mute font-medium max-w-sm leading-relaxed">
-              Harita yakında. Şimdilik Google Maps'te <span className="font-bold text-ink">"Bay Car Service Fethiye"</span> diye arayabilirsiniz.
-            </p>
+      {/* Map */}
+      <section className="w-full max-w-7xl mx-auto px-6 pb-24">
+         {/* NOT: arama-bazlı embed. Bayram Usta'nın Google Business profili/koordinatı gelince
+             tam pin'li embed (place_id) ile değiştirilebilir. */}
+         <div className="rounded-2xl overflow-hidden shadow-lg border border-ink/10">
+            <iframe
+              src="https://www.google.com/maps?q=Bay+Car+Service+Fethiye+Taşyaka&output=embed"
+              width="100%"
+              height="400"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={{ border: 0 }}
+              title="Bay Car Service Konum"
+              className="w-full block"
+            />
          </div>
       </section>
 

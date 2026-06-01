@@ -294,7 +294,7 @@ export default function Home() {
                 </p>
                 <p className="text-mute text-sm mb-12">Ölüdeniz yolu üzeri, kanal köprüsü yanı</p>
               </div>
-              <a href="#" className="text-accent font-medium group-hover:text-ink transition border-b border-accent group-hover:border-ink pb-0.5 inline-block">
+              <a href="https://www.google.com/maps/dir/?api=1&destination=Bay+Car+Service+Fethiye+Taşyaka" target="_blank" rel="noopener noreferrer" className="text-accent font-medium group-hover:text-ink transition border-b border-accent group-hover:border-ink pb-0.5 inline-block">
                 Yol Tarifi Al →
               </a>
             </motion.div>

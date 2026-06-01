@@ -21,6 +21,7 @@ export const businessSchema = {
   "founder": {"@type": "Person", "name": "Bayram Öğütveren"},
   "areaServed": ["Fethiye","Ölüdeniz","Çalış","Kayaköy","Göcek","Hisarönü"],
   "knowsAbout": ["Mercedes-Benz","BMW","Audi","Volkswagen","Porsche","Bosch Car Service"],
-  "image": "https://baycarservice.com/og-image.jpg",
+  // NOT: geçici SVG placeholder — gerçek atölye fotoğraflı JPG ile değiştirilmeli
+  "image": "https://baycarservice.com/og-image.svg",
   "url": "https://baycarservice.com"
 }
