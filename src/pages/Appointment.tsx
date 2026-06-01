@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { brands } from '../lib/brands';
 
+const WHATSAPP_NUMBER = '905346682445';
+
 export default function Appointment() {
   const [searchParams] = useSearchParams();
   // Expecting smallcase brand slug from URL
@@ -21,7 +23,7 @@ export default function Appointment() {
     time: ''
   });
 
-  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,10 +31,27 @@ export default function Appointment() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate submission for Web3Forms placeholder
-    setTimeout(() => {
-      setSuccess(true);
-    }, 500);
+
+    // Validation: ad soyad ve telefon zorunlu
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      setError('Lütfen ad soyad ve telefon alanlarını doldurun.');
+      return;
+    }
+    setError('');
+
+    // Form bilgilerinden WhatsApp mesajı oluştur (gerçek \n + encodeURIComponent)
+    const message =
+      `Merhaba, randevu talebim var:\n\n` +
+      `Ad Soyad: ${formData.name}\n` +
+      `Telefon: ${formData.phone}\n` +
+      `E-posta: ${formData.email || '-'}\n` +
+      `Marka: ${formData.brand}\n` +
+      `Model/Yıl: ${formData.modelYear || '-'}\n` +
+      `Sorun: ${formData.description || '-'}\n` +
+      `Tercih edilen tarih: ${formData.date || '-'}\n` +
+      `Tercih edilen saat: ${formData.time || '-'}`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
@@ -51,98 +70,93 @@ export default function Appointment() {
       <div className="max-w-3xl w-full text-center mb-12">
         <h1 className="text-5xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Randevu Talebi</h1>
         <p className="text-lg text-mute">
-          24 saat içinde size geri dönelim. Acil durumlar için <a href="tel:+905346682445" className="text-accent underline hover:text-ink transition">yol yardım hattını</a> arayın.
+          Formu doldurun, WhatsApp üzerinden size dönelim. Acil durumlar için <a href="tel:+905346682445" className="text-accent underline hover:text-ink transition">yol yardım hattını</a> arayın.
         </p>
       </div>
 
       <div className="bg-white max-w-3xl w-full rounded-2xl shadow-xl overflow-hidden border border-ink/10">
-        {success ? (
-          <div className="p-16 text-center">
-            <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+        <form
+          onSubmit={handleSubmit}
+          className="p-8 md:p-12 flex flex-col gap-6"
+          noValidate
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-2">
+               <label htmlFor="name" className="text-sm font-bold text-ink/80">Ad Soyad</label>
+               <input required aria-required="true" id="name" type="text" name="name" value={formData.name} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
             </div>
-            <h2 className="text-3xl font-bold text-ink mb-2" style={{ fontFamily: 'var(--font-display)' }}>Talebiniz Alındı</h2>
-            <p className="text-mute mb-8">Randevu detaylarınızı inceleyip en kısa sürede sizinle iletişime geçeceğiz.</p>
-            <button 
-              onClick={() => setSuccess(false)}
-              className="bg-ink text-surface px-8 py-3 rounded-xl font-medium hover:bg-accent transition"
-            >
-              Yeni Talep Oluştur
-            </button>
+            <div className="flex flex-col gap-2">
+               <label htmlFor="phone" className="text-sm font-bold text-ink/80">Telefon</label>
+               <input required aria-required="true" id="phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0555..." className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
+            </div>
           </div>
-        ) : (
-          <form 
-            onSubmit={handleSubmit} 
-            action="https://api.web3forms.com/submit" 
-            method="POST"
-            className="p-8 md:p-12 flex flex-col gap-6"
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="text-sm font-bold text-ink/80">E-posta (Opsiyonel)</label>
+            <input id="email" type="email" name="email" value={formData.email} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-2">
+               <label htmlFor="brand" className="text-sm font-bold text-ink/80">Araç Markası</label>
+               <select id="brand" name="brand" value={formData.brand} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50">
+                 {Object.values(brands).map(b => (
+                   <option key={b.name} value={b.name}>{b.name}</option>
+                 ))}
+                 <option value="Diğer">Diğer</option>
+               </select>
+            </div>
+            <div className="flex flex-col gap-2">
+               <label htmlFor="modelYear" className="text-sm font-bold text-ink/80">Model & Yıl</label>
+               <input id="modelYear" type="text" name="modelYear" value={formData.modelYear} onChange={handleChange} placeholder="Örn. C200 2019" className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="description" className="text-sm font-bold text-ink/80">Sorun Açıklaması / Talebiniz</label>
+            <textarea id="description" name="description" value={formData.description} onChange={handleChange} rows={4} className="p-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50 resize-none" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-2">
+               <label htmlFor="date" className="text-sm font-bold text-ink/80">Tercih Edilen Tarih</label>
+               <input id="date" type="date" name="date" value={formData.date} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
+            </div>
+            <div className="flex flex-col gap-2">
+               <label htmlFor="time" className="text-sm font-bold text-ink/80">Tercih Edilen Saat</label>
+               <select id="time" name="time" value={formData.time} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50">
+                 <option value="">Saat seçiniz</option>
+                 <option value="Sabah 09:00-12:00">Sabah 09:00 - 12:00</option>
+                 <option value="Öğle 12:00-15:00">Öğle 12:00 - 15:00</option>
+                 <option value="Öğleden sonra 15:00-18:00">Öğleden Sonra 15:00 - 18:00</option>
+               </select>
+            </div>
+          </div>
+
+          {error && (
+            <p role="alert" className="text-[var(--color-alert)] text-sm font-medium bg-[var(--color-alert)]/5 border border-[var(--color-alert)]/20 rounded-xl px-4 py-3">
+              {error}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            aria-label="WhatsApp ile randevu talebi gönder"
+            className="mt-4 bg-ink text-surface h-14 rounded-xl font-bold text-lg hover:bg-accent transition shadow-lg"
           >
-            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                 <label className="text-sm font-bold text-ink/80">Ad Soyad</label>
-                 <input required type="text" name="name" value={formData.name} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
-              </div>
-              <div className="flex flex-col gap-2">
-                 <label className="text-sm font-bold text-ink/80">Telefon</label>
-                 <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0555..." className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-bold text-ink/80">E-posta (Opsiyonel)</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                 <label className="text-sm font-bold text-ink/80">Araç Markası</label>
-                 <select name="brand" value={formData.brand} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50">
-                   {Object.values(brands).map(b => (
-                     <option key={b.name} value={b.name}>{b.name}</option>
-                   ))}
-                   <option value="Diğer">Diğer</option>
-                 </select>
-              </div>
-              <div className="flex flex-col gap-2">
-                 <label className="text-sm font-bold text-ink/80">Model & Yıl</label>
-                 <input type="text" name="modelYear" value={formData.modelYear} onChange={handleChange} placeholder="Örn. C200 2019" className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-bold text-ink/80">Sorun Açıklaması / Talebiniz</label>
-              <textarea name="description" value={formData.description} onChange={handleChange} rows={4} className="p-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50 resize-none" />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                 <label className="text-sm font-bold text-ink/80">Tercih Edilen Tarih</label>
-                 <input type="date" name="date" value={formData.date} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50" />
-              </div>
-              <div className="flex flex-col gap-2">
-                 <label className="text-sm font-bold text-ink/80">Tercih Edilen Saat</label>
-                 <select name="time" value={formData.time} onChange={handleChange} className="h-12 px-4 rounded-xl border border-ink/20 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition bg-surface/50">
-                   <option value="">Saat seçiniz</option>
-                   <option value="Sabah 09:00-12:00">Sabah 09:00 - 12:00</option>
-                   <option value="Öğle 12:00-15:00">Öğle 12:00 - 15:00</option>
-                   <option value="Öğleden sonra 15:00-18:00">Öğleden Sonra 15:00 - 18:00</option>
-                 </select>
-              </div>
-            </div>
-
-            <button type="submit" className="mt-4 bg-ink text-surface h-14 rounded-xl font-bold text-lg hover:bg-accent transition shadow-lg">
-              Randevu Talebi Gönder
-            </button>
-          </form>
-        )}
+            WhatsApp ile Randevu Talebi Gönder
+          </button>
+          <p className="text-center text-sm text-mute -mt-2">
+            WhatsApp uygulamanız açılacak, mesaj hazır gelecek.
+          </p>
+        </form>
       </div>
 
-      <a 
-        href="https://wa.me/905346682445?text=Merhaba,%20randevu%20almak%20istiyorum." 
-        target="_blank" 
-        rel="noopener noreferrer" 
+      <a
+        href="https://wa.me/905346682445?text=Merhaba,%20randevu%20almak%20istiyorum."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Acil durum için doğrudan WhatsApp'tan yazın"
         className="mt-8 text-mute hover:text-ink font-medium transition flex items-center gap-2"
       >
         Acil mi? WhatsApp'tan yazın →
