@@ -35,12 +35,11 @@ function Header() {
     setMenuOpen(false);
   }, [location.pathname]);
   
-  // Set transparent if scrolled == false and we are on home (dark bg) or specific routes?
-  // Home has a light radial background at the hero, so text-ink is fine. About has dark hero, so text-surface if scrolled=false?
-  // User prompt: "İlk başta: bg transparent, text-ink (Home'da hero kremde olduğu için)"
-  // So we just use text-ink globally for simplicity, it works well since surface is cream.
-  // Although About has bg-ink (Dark). The user implicitly means the text might need to adapt or just remain visible. 
-  // Let's use mix-blend-difference or a solid text-ink since it's transparent and backdrop-blur occurs later. Or we just keep it text-ink.
+  // Koyu hero'lu rotalar: en üstteyken (scroll yokken) header açık renk olmalı,
+  // yoksa siyah logo/nav koyu hero üstünde görünmez kalır.
+  const darkHeroRoutes = ['/acil', '/hakkimizda'];
+  const isDarkHero = darkHeroRoutes.includes(location.pathname) || location.pathname.startsWith('/servisler/');
+  const onDarkHero = !scrolled && isDarkHero;
 
   return (
     <>
@@ -53,14 +52,14 @@ function Header() {
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link to="/" className="z-50 relative">
-            <div className={`inline-block relative ${(!scrolled && location.pathname === '/hakkimizda') ? 'text-surface' : 'text-ink'}`}>
+            <div className={`inline-block relative transition-colors duration-300 ${onDarkHero ? 'text-surface' : 'text-ink'}`}>
               <h1 className="text-2xl font-bold tracking-[0.2em]" style={{ fontFamily: 'var(--font-display)' }}>
                 BAY·CAR
               </h1>
             </div>
           </Link>
           
-          <nav className={`hidden md:flex items-center gap-8 text-[11px] uppercase tracking-widest font-mono font-bold ${(!scrolled && location.pathname === '/hakkimizda') ? 'text-surface/90' : 'text-ink'}`}>
+          <nav className={`hidden md:flex items-center gap-8 text-[11px] uppercase tracking-widest font-mono font-bold transition-colors duration-300 ${onDarkHero ? 'text-surface/90' : 'text-ink'}`}>
             <Link to="/servisler" className={`${location.pathname.startsWith('/servisler') ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Servisler</Link>
             <Link to="/hakkimizda" className={`${location.pathname === '/hakkimizda' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Hakkımızda</Link>
             <Link to="/galeri" className={`${location.pathname === '/galeri' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Galeri</Link>
@@ -70,7 +69,7 @@ function Header() {
 
           <div className="hidden md:block">
             <Link to="/randevu" className={`px-5 py-2.5 rounded-lg text-sm font-bold transition shadow ${
-              (!scrolled && location.pathname === '/hakkimizda') 
+              onDarkHero 
               ? 'bg-surface text-ink hover:bg-accent hover:text-surface' 
               : 'bg-ink text-surface hover:bg-accent hover:text-white'
             }`}>
@@ -79,7 +78,7 @@ function Header() {
           </div>
 
           <button 
-            className={`md:hidden z-50 relative p-2 ${menuOpen || (!scrolled && location.pathname === '/hakkimizda') ? 'text-surface' : 'text-ink'}`}
+            className={`md:hidden z-50 relative p-2 transition-colors duration-300 ${menuOpen || onDarkHero ? 'text-surface' : 'text-ink'}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
