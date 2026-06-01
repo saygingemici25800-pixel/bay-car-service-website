@@ -25,11 +25,12 @@ function Counter({ value, suffix = '' }: { value: number, suffix?: string }) {
   )
 }
 
-const stats = [
+type Stat = { value?: number; suffix?: string; text?: string; label: string; sub: string }
+
+const stats: Stat[] = [
   { value: 12, suffix: '', label: 'yıl atölye', sub: '2010\'dan beri' },
-  { value: 1200, suffix: '+', label: 'tamamlanan iş', sub: 'Mercedes, BMW, Audi, VW, Porsche' },
+  { text: 'Yüzlerce', label: 'araç bakımı', sub: 'Mercedes, BMW, Audi, VW, Porsche' },
   { value: 5, suffix: '', label: 'marka uzmanı', sub: 'Alman grubu, Bosch sertifikalı' },
-  { value: 4.8, suffix: '/5', label: 'Google puanı', sub: '47+ doğrulanmış yorum' }
 ]
 
 export default function StatsSection() {
@@ -47,13 +48,13 @@ export default function StatsSection() {
             style={{ fontFamily: 'var(--font-display)' }}
           >
             12 yıl.<br/>
-            <span className="text-mute italic font-normal">1,200 motor.</span><br/>
+            <span className="text-mute italic font-normal">Yüzlerce araç.</span><br/>
             1 atölye.
           </h2>
         </div>
         
         {/* Stats grid — asymetrik (eşit değil) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-ink/10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-ink/10">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
@@ -61,13 +62,17 @@ export default function StatsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-surface p-8 md:p-12 group hover:bg-ink hover:text-surface transition-colors duration-500"
+              className={`bg-surface p-8 md:p-12 group hover:bg-ink hover:text-surface transition-colors duration-500 ${
+                i === stats.length - 1 ? 'col-span-2 md:col-span-1' : ''
+              }`}
             >
-              <div 
+              <div
                 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
-                <Counter value={stat.value} suffix={stat.suffix} />
+                {stat.value !== undefined
+                  ? <Counter value={stat.value} suffix={stat.suffix} />
+                  : stat.text}
               </div>
               <p className="text-sm uppercase tracking-widest font-mono mb-2 text-mute group-hover:text-surface/70 transition">
                 {stat.label}
