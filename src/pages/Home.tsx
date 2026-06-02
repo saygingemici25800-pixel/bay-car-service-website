@@ -26,13 +26,20 @@ const staggerContainer = {
 
 const cardVariant = {
   initial: { opacity: 0, y: 40, scale: 0.95 },
-  whileInView: { 
-    opacity: 1, 
-    y: 0, 
+  whileInView: {
+    opacity: 1,
+    y: 0,
     scale: 1,
     transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
   }
 }
+
+// Geçici örnek yorumlar — Bayram Usta'dan gerçek Google yorumları gelince değiştirilecek.
+const homeReviews = [
+  { text: 'İşçiliği temiz, açıklaması net. Hangi parça neden değişmiş hepsi belli.', author: 'M. K.', car: 'Mercedes' },
+  { text: 'Yetkili servise gitmeden güvendiğim tek yer. Fiyat da makul.', author: 'A. T.', car: 'BMW' },
+  { text: 'Yolda kaldım, hızlı geldiler. Profesyonel yaklaşım.', author: 'C. Y.', car: 'Audi' },
+]
 
 export default function Home() {
   return (
@@ -55,8 +62,8 @@ export default function Home() {
 
       {/* 1. HERO YENİDEN: ASYMETRİK KOMPOZİSYON */}
       <section className="min-h-screen relative overflow-hidden bg-surface">
-        {/* Köşede dikey rotated marka adı */}
-        <div className="absolute top-32 right-8 hidden lg:block z-20">
+        {/* Köşede dikey rotated marka adı — dekoratif, z-0 (en arkada), sağ kenar boşluğunda */}
+        <div className="absolute top-1/2 -translate-y-1/2 right-4 hidden lg:block z-0">
           <span
             aria-hidden="true"
             className="text-mute uppercase tracking-[0.4em] text-xs font-mono"
@@ -66,15 +73,15 @@ export default function Home() {
           </span>
         </div>
         
-        {/* Üst köşe: küçük cesur ifade */}
-        <div className="absolute top-8 left-8 z-10">
+        {/* Üst köşe: küçük cesur ifade — header'ın altına alındı (logo ile çakışmasın), z-20 */}
+        <div className="absolute top-24 left-6 md:left-12 z-20">
           <p className="text-xs font-mono uppercase tracking-widest text-mute">
             <span className="text-accent">●</span> Fethiye Taşyaka · Şu an açık
           </p>
         </div>
         
         {/* 12-column grid container */}
-        <div className="grid grid-cols-12 gap-4 px-6 md:px-12 pt-40 pb-24 relative">
+        <div className="grid grid-cols-12 gap-4 px-6 md:px-12 pt-40 pb-24 relative z-10">
           
           {/* SOL ALT: küçük kicker (col 1-3) */}
           <div className="col-span-12 md:col-span-3 md:col-start-1 md:row-start-1 mt-8">
@@ -176,6 +183,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GALERİ — Akışımız (anasayfa kısa galeri) */}
+      <section id="home-gallery" className="py-24 bg-surface w-full">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          {/* Asymetrik başlık (sol) */}
+          <div className="mb-12">
+            <p className="text-xs font-mono uppercase tracking-widest text-mute mb-4">— Akışımız</p>
+            <h2 className="text-4xl md:text-6xl font-bold text-ink leading-[0.95] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              Atölyeden kareler
+            </h2>
+          </div>
+
+          {/* Kartlar — her biri ayrı motion.div, framer-motion'a hazır */}
+          {/* Animasyon sonra eklenecek - Saygın */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="aspect-[4/3] bg-ink/5 border border-ink/10 rounded-lg flex items-center justify-center hover:scale-[1.02] transition-transform duration-300"
+              >
+                <span className="text-mute text-sm font-medium">Fotoğraf yakında</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Alt sağ link */}
+          <div className="flex justify-end mt-8">
+            <Link to="/galeri" className="group inline-flex items-center gap-3 text-ink hover:text-accent transition">
+              <span className="text-sm uppercase tracking-widest font-mono">Tüm akışı gör</span>
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <MarqueeBrands />
       <StatsSection />
 
@@ -236,6 +277,50 @@ export default function Home() {
                  Yetkili servis kalitesi, sanayi fiyatı. Şeffaf maliyet.
                </p>
              </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* YORUMLAR — premium (placeholder; gerçek Google yorumlarıyla değişecek) */}
+      {/* Bayram Usta'dan gerçek Google yorumları gelince değiştirilecek */}
+      <section id="home-reviews" className="py-32 bg-surface w-full">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          {/* Asymetrik başlık (sol) */}
+          <div className="mb-16">
+            <p className="text-xs font-mono uppercase tracking-widest text-mute mb-4">— Müşteri yorumları</p>
+            <h2 className="text-4xl md:text-6xl font-bold text-ink leading-[0.95] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              Ne diyorlar?
+            </h2>
+          </div>
+
+          {/* 3 kart — her biri ayrı motion.div, framer-motion'a hazır */}
+          {/* Animasyon sonra eklenecek - Saygın */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {homeReviews.map((review, i) => (
+              <motion.div
+                key={i}
+                className="bg-white p-8 md:p-10 rounded-xl border border-ink/5 flex flex-col justify-between"
+              >
+                <p className="text-ink text-lg leading-relaxed mb-8">"{review.text}"</p>
+                <div className="border-t border-ink/5 pt-6">
+                  <p className="font-bold text-ink">{review.author}</p>
+                  <p className="text-sm text-mute mt-1">{review.car}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Alt sağ link */}
+          <div className="flex justify-end mt-12">
+            <a
+              href="https://www.google.com/maps/search/Bay+Car+Service+Fethiye+Taşyaka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 text-ink hover:text-accent transition"
+            >
+              <span className="text-sm uppercase tracking-widest font-mono">Google'da tüm yorumları gör</span>
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+            </a>
           </div>
         </div>
       </section>

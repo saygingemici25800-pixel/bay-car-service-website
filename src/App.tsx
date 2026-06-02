@@ -76,11 +76,10 @@ function Header() {
           </Link>
           
           <nav className={`hidden md:flex items-center gap-8 text-[11px] uppercase tracking-widest font-mono font-bold transition-colors duration-300 ${onDarkHero ? 'text-surface/90' : 'text-ink'}`}>
-            <Link to="/servisler" className={`${location.pathname.startsWith('/servisler') ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Servisler</Link>
-            <Link to="/hakkimizda" className={`${location.pathname === '/hakkimizda' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Hakkımızda</Link>
-            <Link to="/galeri" className={`${location.pathname === '/galeri' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Galeri</Link>
-            <Link to="/yorumlar" className={`${location.pathname === '/yorumlar' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Yorumlar</Link>
-            <Link to="/iletisim" className={`${location.pathname === '/iletisim' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>İletişim</Link>
+            <Link to="/servisler" className={`${location.pathname.startsWith('/servisler') ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Hizmetlerimiz</Link>
+            <Link to="/hakkimizda" className={`${location.pathname === '/hakkimizda' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Biz</Link>
+            <Link to="/galeri" className={`${location.pathname === '/galeri' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>Akışımız</Link>
+            <Link to="/iletisim" className={`${location.pathname === '/iletisim' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>İletişimiz</Link>
           </nav>
 
           <div className="hidden md:block">
@@ -124,11 +123,10 @@ function Header() {
           >
              <div className="flex-1 flex flex-col items-center justify-center gap-8 text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
                 <Link to="/" className="text-ink hover:text-accent transition">Anasayfa</Link>
-                <Link to="/servisler" className="text-ink hover:text-accent transition">Servisler</Link>
-                <Link to="/hakkimizda" className="text-ink hover:text-accent transition">Hakkımızda</Link>
-                <Link to="/galeri" className="text-ink hover:text-accent transition">Galeri</Link>
-                <Link to="/yorumlar" className="text-ink hover:text-accent transition">Yorumlar</Link>
-                <Link to="/iletisim" className="text-ink hover:text-accent transition">İletişim</Link>
+                <Link to="/servisler" className="text-ink hover:text-accent transition">Hizmetlerimiz</Link>
+                <Link to="/hakkimizda" className="text-ink hover:text-accent transition">Biz</Link>
+                <Link to="/galeri" className="text-ink hover:text-accent transition">Akışımız</Link>
+                <Link to="/iletisim" className="text-ink hover:text-accent transition">İletişimiz</Link>
                 <Link to="/randevu" className="text-accent underline underline-offset-8 mt-4">Randevu Al</Link>
              </div>
              <div className="p-6">

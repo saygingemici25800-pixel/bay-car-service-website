@@ -42,11 +42,11 @@ export default function Footer() {
            {/* Column 3 */}
            <div className="flex flex-col gap-4">
              <h4 className="font-bold text-sm uppercase tracking-widest text-white/50 font-mono mb-4">Site</h4>
-             <Link to="/hakkimizda" className="text-surface/80 hover:text-white transition">Hakkımızda</Link>
-             <Link to="/galeri" className="text-surface/80 hover:text-white transition">Galeri</Link>
+             <Link to="/hakkimizda" className="text-surface/80 hover:text-white transition">Biz</Link>
+             <Link to="/galeri" className="text-surface/80 hover:text-white transition">Akışımız</Link>
              <Link to="/yorumlar" className="text-surface/80 hover:text-white transition">Yorumlar</Link>
              <Link to="/randevu" className="text-surface/80 hover:text-white transition">Randevu</Link>
-             <Link to="/iletisim" className="text-surface/80 hover:text-white transition">İletişim</Link>
+             <Link to="/iletisim" className="text-surface/80 hover:text-white transition">İletişimiz</Link>
            </div>
 
            {/* Column 4 */}
