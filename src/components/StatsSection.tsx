@@ -1,5 +1,6 @@
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
 import { useEffect, useRef } from 'react'
+import { FOUNDED_YEAR, YEARS_EXPERIENCE } from '../lib/site'
 
 function Counter({ value, suffix = '' }: { value: number, suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -11,11 +12,18 @@ function Counter({ value, suffix = '' }: { value: number, suffix?: string }) {
     if (isInView) motionValue.set(value)
   }, [isInView, value, motionValue])
 
+  // Ondalıklı değerler (örn. 4.8) için ondalığı koru; tam sayılarda tr-TR binlik ayracı.
+  const isDecimal = !Number.isInteger(value)
+
   useEffect(() => {
     return spring.on('change', (latest) => {
-      if (ref.current) ref.current.textContent = Math.floor(latest).toLocaleString('tr-TR')
+      if (ref.current) {
+        ref.current.textContent = isDecimal
+          ? latest.toFixed(1)
+          : Math.floor(latest).toLocaleString('tr-TR')
+      }
     })
-  }, [spring])
+  }, [spring, isDecimal])
 
   return (
     <>
@@ -28,7 +36,7 @@ function Counter({ value, suffix = '' }: { value: number, suffix?: string }) {
 type Stat = { value?: number; suffix?: string; text?: string; label: string; sub: string }
 
 const stats: Stat[] = [
-  { value: 12, suffix: '', label: 'yıl atölye', sub: '2010\'dan beri' },
+  { value: YEARS_EXPERIENCE, suffix: '+', label: 'yıl atölye', sub: `${FOUNDED_YEAR}'dan beri` },
   { text: 'Yüzlerce', label: 'araç bakımı', sub: 'Mercedes, BMW, Audi, VW, Porsche' },
   { value: 5, suffix: '', label: 'marka uzmanı', sub: 'Alman grubu, Bosch sertifikalı' },
 ]
@@ -47,7 +55,7 @@ export default function StatsSection() {
             className="col-span-12 md:col-span-9 text-4xl md:text-6xl font-bold leading-[0.95] tracking-tight"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            12 yıl.<br/>
+            {YEARS_EXPERIENCE}+ yıl.<br/>
             <span className="text-mute italic font-normal">Yüzlerce araç.</span><br/>
             1 atölye.
           </h2>

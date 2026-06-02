@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { brands } from '../lib/brands'
 import { businessSchema } from '../lib/seo'
+import { YEARS_EXPERIENCE } from '../lib/site'
 import MarqueeBrands from '../components/MarqueeBrands'
 import StatsSection from '../components/StatsSection'
 
@@ -127,7 +128,7 @@ export default function Home() {
           >
             <div className="border-l-2 border-ink pl-6">
               <p className="text-sm text-ink leading-relaxed mb-4">
-                12 yıldır Fethiye'de. Mercedes, BMW, Audi, Volkswagen, 
+                {YEARS_EXPERIENCE}+ yıldır Fethiye'de. Mercedes, BMW, Audi, Volkswagen,
                 Porsche için <span className="font-bold">tek atölye</span>.
               </p>
               <div className="flex flex-col gap-3 mt-6">
