@@ -69,6 +69,8 @@ export default function Appointment() {
     >
       <Helmet>
         <title>Randevu Talebi | Bay Car Service</title>
+        <link rel="canonical" href="https://baycarservice.com/randevu" />
+        <meta property="og:url" content="https://baycarservice.com/randevu" />
         <meta name="description" content="Bay Car Service Fethiye için çevrimiçi randevu al. Alman grubu aracınız için hızlı servis imkanı." />
       </Helmet>
 

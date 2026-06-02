@@ -35,6 +35,8 @@ export default function Gallery() {
     >
       <Helmet>
         <title>Galeri | Bay Car Service</title>
+        <link rel="canonical" href="https://baycarservice.com/galeri" />
+        <meta property="og:url" content="https://baycarservice.com/galeri" />
         <meta name="description" content="Bay Car Service atölyesinden fotoğraflar. Çalışma ortamımız ve onarım sürecinden detaylar." />
       </Helmet>
 

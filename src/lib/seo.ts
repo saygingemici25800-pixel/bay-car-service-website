@@ -12,6 +12,13 @@ export const businessSchema = {
     "postalCode": "48300",
     "addressCountry": "TR"
   },
+  // NOT: yaklaşık Taşyaka koordinatı — Bayram Usta'dan kesin koordinat gelince güncellenecek.
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 36.6239,
+    "longitude": 29.1377
+  },
+  "priceRange": "₺₺",
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],

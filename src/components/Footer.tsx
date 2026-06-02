@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-ink text-surface py-24 w-full relative overflow-hidden">
       
       {/* Decorative Giant Text */}
-      <div className="absolute -bottom-10 -left-10 md:-left-20 text-[10rem] md:text-[20rem] font-bold text-surface opacity-5 pointer-events-none select-none tracking-tighter mix-blend-overlay" style={{ fontFamily: 'var(--font-display)', lineHeight: '0.7' }}>
+      <div aria-hidden="true" className="absolute -bottom-10 -left-10 md:-left-20 text-[10rem] md:text-[20rem] font-bold text-surface opacity-5 pointer-events-none select-none tracking-tighter mix-blend-overlay" style={{ fontFamily: 'var(--font-display)', lineHeight: '0.7' }}>
         BAY CAR
       </div>
 

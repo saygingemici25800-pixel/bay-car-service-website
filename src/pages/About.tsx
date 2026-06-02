@@ -19,6 +19,8 @@ export default function About() {
     >
       <Helmet>
         <title>Hakkımızda | Bay Car Service</title>
+        <link rel="canonical" href="https://baycarservice.com/hakkimizda" />
+        <meta property="og:url" content="https://baycarservice.com/hakkimizda" />
         <meta name="description" content="Bayram Öğütveren'in Mercedes ve BMW yetkili servis tecrübesiyle kurulan Fethiye Bay Car Service hikayesi." />
       </Helmet>
 

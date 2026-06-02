@@ -46,6 +46,8 @@ export default function Home() {
       <Helmet>
         <title>Bay Car Service Fethiye | Mercedes BMW Audi VW Porsche Özel Servisi</title>
         <meta name="description" content="Fethiye Taşyaka'da Bosch sertifikalı Alman grubu özel servis. Mercedes, BMW, Audi, Volkswagen, Porsche. 7/24 yol yardım. 0534 668 24 45." />
+        <link rel="canonical" href="https://baycarservice.com/" />
+        <meta property="og:url" content="https://baycarservice.com/" />
         <script type="application/ld+json">
           {JSON.stringify(businessSchema)}
         </script>
@@ -55,7 +57,8 @@ export default function Home() {
       <section className="min-h-screen relative overflow-hidden bg-surface">
         {/* Köşede dikey rotated marka adı */}
         <div className="absolute top-32 right-8 hidden lg:block z-20">
-          <span 
+          <span
+            aria-hidden="true"
             className="text-mute uppercase tracking-[0.4em] text-xs font-mono"
             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
           >

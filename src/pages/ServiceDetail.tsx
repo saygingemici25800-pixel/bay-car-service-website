@@ -22,6 +22,8 @@ export default function ServiceDetail() {
     >
       <Helmet>
         <title>{brandData.fullName} Fethiye | Bay Car Service</title>
+        <link rel="canonical" href={`https://baycarservice.com/servisler/${brandData.slug}`} />
+        <meta property="og:url" content={`https://baycarservice.com/servisler/${brandData.slug}`} />
         <meta name="description" content={`Fethiye'de ${brandData.fullName}. Bosch sertifikalı uzman kadro. Periyodik bakım, motor onarım, fren sistemi, elektronik diagnoz. 0534 668 24 45.`} />
         <script type="application/ld+json">
           {JSON.stringify({

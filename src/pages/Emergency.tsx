@@ -13,6 +13,8 @@ export default function Emergency() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="w-full bg-surface">
       <Helmet>
         <title>7/24 Yol Yardım Fethiye | Bay Car Service</title>
+        <link rel="canonical" href="https://baycarservice.com/acil" />
+        <meta property="og:url" content="https://baycarservice.com/acil" />
         <meta name="description" content="Fethiye, Ölüdeniz, Çalış, Kayaköy çevresine 30 dakika içinde yol yardım. Akü, yakıt, lastik, çekme. 0534 668 24 45." />
       </Helmet>
 

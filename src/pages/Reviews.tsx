@@ -13,6 +13,8 @@ export default function Reviews() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="w-full bg-surface">
       <Helmet>
         <title>Müşteri Yorumları | Bay Car Service</title>
+        <link rel="canonical" href="https://baycarservice.com/yorumlar" />
+        <meta property="og:url" content="https://baycarservice.com/yorumlar" />
         <meta name="description" content="Bay Car Service Fethiye müşteri yorumları. Deneyiminizi Google üzerinden paylaşın, değerlendirmeleri görün." />
       </Helmet>
 

@@ -41,6 +41,8 @@ export default function Services() {
     >
       <Helmet>
         <title>Servisler | Bay Car Service Fethiye</title>
+        <link rel="canonical" href="https://baycarservice.com/servisler" />
+        <meta property="og:url" content="https://baycarservice.com/servisler" />
       </Helmet>
 
       {/* Hero */}

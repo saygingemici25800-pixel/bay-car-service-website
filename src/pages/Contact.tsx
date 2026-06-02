@@ -13,6 +13,8 @@ export default function Contact() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="w-full bg-surface">
       <Helmet>
         <title>İletişim | Bay Car Service Fethiye</title>
+        <link rel="canonical" href="https://baycarservice.com/iletisim" />
+        <meta property="og:url" content="https://baycarservice.com/iletisim" />
         <meta name="description" content="Bay Car Service iletişim bilgileri. Fethiye Taşyaka Sanayi Sitesi ve Çarşı adreslerimiz. Bize hemen ulaşın: 0534 668 24 45." />
       </Helmet>
 

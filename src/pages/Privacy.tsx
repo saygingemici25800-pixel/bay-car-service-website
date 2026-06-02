@@ -12,6 +12,8 @@ export default function Privacy() {
         <title>KVKK & Gizlilik | Bay Car Service</title>
         <meta name="robots" content="noindex" />
         <meta name="description" content="Bay Car Service kişisel verilerin korunması (KVKK) aydınlatma metni." />
+        {/* noindex sayfa: canonical eklenmedi (noindex + canonical karışık sinyal olmasın) */}
+        <meta property="og:url" content="https://baycarservice.com/gizlilik" />
       </Helmet>
 
       {/* Hero */}

@@ -7,7 +7,7 @@ export default function MarqueeBrands() {
   const duplicated = [...brands, ...brands, ...brands, ...brands]
   
   return (
-    <section className="bg-ink text-surface py-12 overflow-hidden border-y border-ink">
+    <section aria-hidden="true" className="bg-ink text-surface py-12 overflow-hidden border-y border-ink">
       <motion.div
         className="flex whitespace-nowrap gap-16 w-max"
         animate={{ x: ['0%', '-50%'] }}

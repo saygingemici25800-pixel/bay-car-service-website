@@ -35,6 +35,21 @@ function Header() {
     // eslint-disable-next-line
     setMenuOpen(false);
   }, [location.pathname]);
+
+  // Mobil menü açıkken: arka plan scroll kilidi + Escape ile kapatma
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen]);
   
   // Koyu hero'lu rotalar: en üstteyken (scroll yokken) header açık renk olmalı,
   // yoksa siyah logo/nav koyu hero üstünde görünmez kalır.
@@ -81,9 +96,11 @@ function Header() {
           <button 
             className={`md:hidden z-50 relative p-2 transition-colors duration-300 ${menuOpen || onDarkHero ? 'text-surface' : 'text-ink'}`}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Menüyü aç/kapat"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            <svg className={`w-6 h-6 ${menuOpen ? 'text-ink' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-6 h-6 ${menuOpen ? 'text-ink' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               {menuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -97,7 +114,8 @@ function Header() {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div 
+          <motion.div
+            id="mobile-menu"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
