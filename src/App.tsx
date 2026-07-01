@@ -12,10 +12,10 @@ import Reviews from './pages/Reviews'
 import Appointment from './pages/Appointment'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
-import LogoPreview from './pages/LogoPreview'
 import NotFound from './pages/NotFound'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import LogoBC from './components/logos/LogoBC'
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,8 +68,9 @@ function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link to="/" className="z-50 relative">
-            <div className={`inline-block relative transition-colors duration-300 ${onDarkHero ? 'text-surface' : 'text-ink'}`}>
+          <Link to="/" className="z-50 relative" aria-label="Bay Car Service — Anasayfa">
+            <div className={`flex items-center gap-3 transition-colors duration-300 ${onDarkHero ? 'text-surface' : 'text-ink'}`}>
+              <LogoBC aria-hidden="true" className="h-7 w-7 sm:h-8 sm:w-8 shrink-0" />
               <h1 className="text-2xl font-bold tracking-[0.2em]" style={{ fontFamily: 'var(--font-display)' }}>
                 BAY·CAR
               </h1>
@@ -158,7 +159,6 @@ function AnimatedRoutes() {
         <Route path="/randevu" element={<Appointment />} />
         <Route path="/iletisim" element={<Contact />} />
         <Route path="/gizlilik" element={<Privacy />} />
-        <Route path="/logo-preview" element={<LogoPreview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <title>Bay Car Service</title>
-  <circle cx="50" cy="50" r="50" fill="#1A1D21"/>
-  <g fill="none" stroke="#F2EEE5" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M20 28 V72"/>
-    <path d="M20 28 H31 A11 11 0 0 1 31 50 H20"/>
-    <path d="M20 50 H31 A11 11 0 0 1 31 72 H20"/>
-    <path d="M84.38 61.47 A20 20 0 1 1 84.38 38.53"/>
+  <rect x="2" y="2" width="96" height="96" rx="22" fill="#1A1D21"/>
+  <g fill="none" stroke="#F2EEE5" stroke-width="12" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M37 26 V74"/>
+    <path d="M37 26 H53 A13 13 0 0 1 53 50 H37"/>
+    <path d="M37 50 H53 A13 13 0 0 1 53 74 H37"/>
   </g>
 </svg>
