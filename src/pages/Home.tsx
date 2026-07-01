@@ -1,11 +1,16 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { brands } from '../lib/brands'
 import { businessSchema } from '../lib/seo'
 import { YEARS_EXPERIENCE } from '../lib/site'
+import { useIsDesktop } from '../hooks/useIsDesktop'
 import MarqueeBrands from '../components/MarqueeBrands'
 import StatsSection from '../components/StatsSection'
+
+// three.js ağır bir chunk — sadece desktop'ta ve talep üzerine indirilsin.
+const HeroScene = lazy(() => import('../components/HeroScene'))
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -42,6 +47,8 @@ const homeReviews = [
 ]
 
 export default function Home() {
+  const isDesktop = useIsDesktop()
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -62,17 +69,31 @@ export default function Home() {
 
       {/* 1. HERO YENİDEN: ASYMETRİK KOMPOZİSYON */}
       <section className="min-h-screen relative overflow-hidden bg-surface">
-        {/* Köşede dikey rotated marka adı — dekoratif, z-0 (en arkada), sağ kenar boşluğunda */}
-        <div className="absolute top-1/2 -translate-y-1/2 right-4 hidden lg:block z-0">
-          <span
-            aria-hidden="true"
-            className="text-mute uppercase tracking-[0.4em] text-xs font-mono"
-            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-          >
-            BAY · CAR · SERVICE · EST · 2010 · FETHIYE
-          </span>
-        </div>
-        
+        {/* SAĞ TARAF: dönen 3D motor + üstünde "BAY CAR" overlay — sadece desktop.
+            Mobilde hiç mount edilmez (model indirilmez). */}
+        {isDesktop && (
+          <div className="absolute top-[10%] right-0 w-[42%] h-[52vh] z-20 hidden md:block">
+            <Suspense fallback={null}>
+              <HeroScene />
+            </Suspense>
+            {/* HTML overlay — tıklama 3D'ye geçsin diye pointer-events yok */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <span
+                aria-hidden="true"
+                className="select-none text-center font-bold uppercase leading-[0.82] text-ink"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(3rem, 7vw, 8rem)',
+                  letterSpacing: '-0.04em',
+                  mixBlendMode: 'multiply',
+                }}
+              >
+                Bay<br />Car
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Üst köşe: küçük cesur ifade — header'ın altına alındı (logo ile çakışmasın), z-20 */}
         <div className="absolute top-24 left-6 md:left-12 z-20">
           <p className="text-xs font-mono uppercase tracking-widest text-mute">
@@ -128,7 +149,24 @@ export default function Home() {
               </motion.span>
             </h1>
           </div>
-          
+
+          {/* MOBİL fallback: 3D yerine hafif statik marka bloğu (model yüklenmez) */}
+          {!isDesktop && (
+            <div className="col-span-12 md:hidden mt-8">
+              <div className="bg-ink text-surface rounded-2xl px-6 py-8 flex flex-col gap-3">
+                <span
+                  className="font-bold uppercase leading-[0.85] tracking-tight text-5xl"
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
+                  Bay Car
+                </span>
+                <p className="text-surface/60 text-[11px] font-mono uppercase tracking-[0.2em] leading-relaxed">
+                  {Object.values(brands).map((b) => b.name).join(' · ')}
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* SAĞ ALT (col 9-12): meta info kart */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
