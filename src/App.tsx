@@ -12,6 +12,7 @@ import Reviews from './pages/Reviews'
 import Appointment from './pages/Appointment'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
+import LogoPreview from './pages/LogoPreview'
 import NotFound from './pages/NotFound'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
@@ -157,6 +158,7 @@ function AnimatedRoutes() {
         <Route path="/randevu" element={<Appointment />} />
         <Route path="/iletisim" element={<Contact />} />
         <Route path="/gizlilik" element={<Privacy />} />
+        <Route path="/logo-preview" element={<LogoPreview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
