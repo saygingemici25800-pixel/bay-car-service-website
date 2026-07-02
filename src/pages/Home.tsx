@@ -6,7 +6,6 @@ import { brands } from '../lib/brands'
 import { businessSchema } from '../lib/seo'
 import { YEARS_EXPERIENCE } from '../lib/site'
 import { useIsDesktop } from '../hooks/useIsDesktop'
-import MarqueeBrands from '../components/MarqueeBrands'
 import StatsSection from '../components/StatsSection'
 
 // three.js ağır bir chunk — sadece desktop'ta ve talep üzerine indirilsin.
@@ -240,7 +239,6 @@ export default function Home() {
         </div>
       </section>
 
-      <MarqueeBrands />
       <StatsSection />
 
       {/* 2. BRAND GRID SECTION */}
