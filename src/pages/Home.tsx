@@ -69,28 +69,13 @@ export default function Home() {
 
       {/* 1. HERO YENİDEN: ASYMETRİK KOMPOZİSYON */}
       <section className="min-h-screen relative overflow-hidden bg-surface">
-        {/* SAĞ TARAF: dönen 3D motor + üstünde "BAY CAR" overlay — sadece desktop.
+        {/* SAĞ TARAF: dönen 3D motor — sadece desktop.
             Mobilde hiç mount edilmez (model indirilmez). */}
         {isDesktop && (
           <div className="absolute top-[10%] right-0 w-[42%] h-[52vh] z-20 hidden md:block">
             <Suspense fallback={null}>
               <HeroScene />
             </Suspense>
-            {/* HTML overlay — tıklama 3D'ye geçsin diye pointer-events yok */}
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <span
-                aria-hidden="true"
-                className="select-none text-center font-bold uppercase leading-[0.82] text-ink"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(3rem, 7vw, 8rem)',
-                  letterSpacing: '-0.04em',
-                  mixBlendMode: 'multiply',
-                }}
-              >
-                Bay<br />Car
-              </span>
-            </div>
           </div>
         )}
 
