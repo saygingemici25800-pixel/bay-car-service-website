@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
+import { MAPS, ADDRESS, HOURS } from '../lib/site'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -43,27 +44,27 @@ export default function Contact() {
                   <p className="text-ink/60 font-medium mb-10">Alman Grubu Özel Servis</p>
                   
                   <div className="mb-10 text-lg">
-                    <p className="text-ink mb-2">Taşyaka Mah. Sanayi Sitesi,<br/>Şht. Fethi Bey Cad. No: 47/B<br/>Fethiye / Muğla</p>
-                    <p className="text-mute text-base">Ölüdeniz yolu üzeri, kanal köprüsü yanı</p>
+                    <p className="text-ink mb-2">{ADDRESS.street},<br/>{ADDRESS.cityLine}</p>
+                    <p className="text-mute text-base">{ADDRESS.landmark}</p>
                   </div>
 
                   <div className="bg-surface/50 p-6 rounded-2xl border border-ink/5 mb-10">
                     <div className="flex justify-between items-center border-b border-ink/10 pb-3 mb-3">
-                       <span className="font-bold text-ink">Pzt - Cmt</span>
-                       <span className="text-mute font-medium">08:00 - 20:00</span>
+                       <span className="font-bold text-ink">{HOURS.weekLabel}</span>
+                       <span className="text-mute font-medium">{HOURS.weekTime}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                       <span className="font-bold text-ink text-opacity-50">Pazar</span>
-                       <span className="text-[var(--color-alert)] font-medium text-sm">Kapalı (acil için ara)</span>
+                       <span className="font-bold text-ink text-opacity-50">{HOURS.sundayLabel}</span>
+                       <span className="text-[var(--color-alert)] font-medium text-sm">{HOURS.sundayText} (acil için ara)</span>
                     </div>
                   </div>
                </div>
                
                <div className="flex flex-col gap-3">
-                 <a href="https://www.google.com/maps/search/Bay+Car+Service+Fethiye+Taşyaka" target="_blank" rel="noopener noreferrer" className="bg-ink text-surface text-center font-bold py-4 rounded-xl hover:bg-accent transition shadow-lg w-full" aria-label="Google Maps'te Aç">
+                 <a href={MAPS.business} target="_blank" rel="noopener noreferrer" className="bg-ink text-surface text-center font-bold py-4 rounded-xl hover:bg-accent transition shadow-lg w-full" aria-label="Google Maps'te Aç">
                    Google Maps'te Aç
                  </a>
-                 <a href="https://www.google.com/maps/dir/?api=1&destination=Bay+Car+Service+Fethiye+Taşyaka" target="_blank" rel="noopener noreferrer" className="border border-ink/20 text-ink text-center font-bold py-4 rounded-xl hover:bg-surface transition w-full" aria-label="Yol Tarifi Al">
+                 <a href={MAPS.directions} target="_blank" rel="noopener noreferrer" className="border border-ink/20 text-ink text-center font-bold py-4 rounded-xl hover:bg-surface transition w-full" aria-label="Yol Tarifi Al">
                    Yol Tarifi Al
                  </a>
                </div>
@@ -97,11 +98,10 @@ export default function Contact() {
 
       {/* Map */}
       <section className="w-full max-w-7xl mx-auto px-6 pb-24">
-         {/* NOT: arama-bazlı embed. Bayram Usta'nın Google Business profili/koordinatı gelince
-             tam pin'li embed (place_id) ile değiştirilebilir. */}
+         {/* Gerçek koordinatlı embed (Google Business). */}
          <div className="rounded-2xl overflow-hidden shadow-lg border border-ink/10">
             <iframe
-              src="https://www.google.com/maps?q=Bay+Car+Service+Fethiye+Taşyaka&output=embed"
+              src={MAPS.embed}
               width="100%"
               height="400"
               loading="lazy"

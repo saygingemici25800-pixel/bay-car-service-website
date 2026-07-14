@@ -16,6 +16,7 @@ import NotFound from './pages/NotFound'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import LogoBC from './components/logos/LogoBC'
+import { PHONE_TEL, PHONE_DISPLAY } from './lib/site'
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -84,31 +85,49 @@ function Header() {
             <Link to="/iletisim" className={`${location.pathname === '/iletisim' ? 'text-accent border-b border-accent' : 'hover:text-accent transition'}`}>İletişimiz</Link>
           </nav>
 
-          <div className="hidden md:block">
-            <Link to="/randevu" className={`px-5 py-2.5 rounded-lg text-sm font-bold transition shadow ${
-              onDarkHero 
-              ? 'bg-surface text-ink hover:bg-accent hover:text-surface' 
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* Telefon — ikincil (ghost) buton; mobilde sadece ikon, geniş ekranda numara */}
+            <a
+              href={`tel:${PHONE_TEL}`}
+              aria-label={`Telefonla ara: ${PHONE_DISPLAY}`}
+              className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-bold transition ${
+                onDarkHero
+                  ? 'border-surface/40 text-surface hover:bg-surface hover:text-ink'
+                  : 'border-ink/25 text-ink hover:bg-ink hover:text-surface'
+              }`}
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <span className="hidden lg:inline whitespace-nowrap">{PHONE_DISPLAY}</span>
+            </a>
+
+            {/* Randevu Al — desktop */}
+            <Link to="/randevu" className={`hidden md:inline-block px-5 py-2.5 rounded-lg text-sm font-bold transition shadow ${
+              onDarkHero
+              ? 'bg-surface text-ink hover:bg-accent hover:text-surface'
               : 'bg-ink text-surface hover:bg-accent hover:text-white'
             }`}>
               Randevu Al
             </Link>
-          </div>
 
-          <button 
-            className={`md:hidden z-50 relative p-2 transition-colors duration-300 ${menuOpen || onDarkHero ? 'text-surface' : 'text-ink'}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menüyü aç/kapat"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-          >
-            <svg className={`w-6 h-6 ${menuOpen ? 'text-ink' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              {menuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+            {/* Mobil menü butonu */}
+            <button
+              className={`md:hidden z-50 relative p-2 -mr-2 transition-colors duration-300 ${menuOpen || onDarkHero ? 'text-surface' : 'text-ink'}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menüyü aç/kapat"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+            >
+              <svg className={`w-6 h-6 ${menuOpen ? 'text-ink' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                {menuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 

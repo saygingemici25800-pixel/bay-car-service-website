@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { brands } from '../lib/brands'
 import { businessSchema } from '../lib/seo'
-import { YEARS_EXPERIENCE } from '../lib/site'
+import { YEARS_EXPERIENCE, MAPS, ADDRESS, HOURS } from '../lib/site'
+import { getOpenStatus } from '../lib/openStatus'
 import { useIsDesktop } from '../hooks/useIsDesktop'
 import StatsSection from '../components/StatsSection'
 import TreatedImage from '../components/TreatedImage'
@@ -48,6 +49,7 @@ const homeReviews = [
 
 export default function Home() {
   const isDesktop = useIsDesktop()
+  const status = getOpenStatus()
 
   return (
     <motion.div
@@ -82,7 +84,7 @@ export default function Home() {
         {/* Üst köşe: küçük cesur ifade — header'ın altına alındı (logo ile çakışmasın), z-20 */}
         <div className="absolute top-24 left-6 md:left-12 z-20">
           <p className="text-xs font-mono uppercase tracking-widest text-mute">
-            <span className="text-accent">●</span> Fethiye Taşyaka · Şu an açık
+            <span className={status.isOpen ? 'text-accent' : 'text-mute'}>●</span> Fethiye Taşyaka · {status.label}
           </p>
         </div>
         
@@ -434,11 +436,11 @@ export default function Home() {
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-ink" style={{ fontFamily: 'var(--font-display)' }}>Bay Car Service</h3>
                 <p className="text-ink mb-2 max-w-sm leading-relaxed">
-                  Taşyaka Mah. Sanayi Sitesi, Şht. Fethi Bey Cad. No: 47/B, Fethiye/Muğla
+                  {ADDRESS.full}
                 </p>
-                <p className="text-mute text-sm mb-12">Ölüdeniz yolu üzeri, kanal köprüsü yanı</p>
+                <p className="text-mute text-sm mb-12">{ADDRESS.landmark}</p>
               </div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Bay+Car+Service+Fethiye+Taşyaka" target="_blank" rel="noopener noreferrer" className="text-accent font-medium group-hover:text-ink transition border-b border-accent group-hover:border-ink pb-0.5 inline-block">
+              <a href={MAPS.directions} target="_blank" rel="noopener noreferrer" className="text-accent font-medium group-hover:text-ink transition border-b border-accent group-hover:border-ink pb-0.5 inline-block">
                 Yol Tarifi Al →
               </a>
             </motion.div>
@@ -449,7 +451,7 @@ export default function Home() {
              transition={{ duration: 0.6, delay: 0.3 }}
              className="pt-8 border-t border-ink/10 w-full flex"
           >
-             <p className="text-mute font-medium text-sm md:text-base">Çalışma saatleri: Pazartesi-Cumartesi 08:00-20:00</p>
+             <p className="text-mute font-medium text-sm md:text-base">Çalışma saatleri: {HOURS.weekLabel} {HOURS.weekTime} · {HOURS.sundayLabel} {HOURS.sundayText.toLowerCase()}</p>
           </motion.div>
         </div>
       </section>

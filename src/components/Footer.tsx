@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ADDRESS, HOURS } from '../lib/site';
 
 export default function Footer() {
   return (
@@ -20,9 +21,8 @@ export default function Footer() {
             <p className="text-surface/60 font-mono text-xs uppercase tracking-widest mt-2">Alman Grubu Özel &middot; EST. 2010</p>
           </div>
           <div className="text-surface/60 font-medium leading-relaxed">
-            <p>Taşyaka Mah. Sanayi Sitesi</p>
-            <p>Şht. Fethi Bey Cad. No: 47/B</p>
-            <p>Fethiye / Muğla</p>
+            <p>{ADDRESS.street}</p>
+            <p>{ADDRESS.cityLine}</p>
           </div>
           <p className="text-surface/40 text-xs border border-surface/10 px-3 py-1.5 rounded-md inline-block w-max font-medium">7/24 yol yardım</p>
         </div>
@@ -54,8 +54,9 @@ export default function Footer() {
              <h4 className="font-bold text-sm uppercase tracking-widest text-white/50 font-mono mb-4">İrtibat</h4>
              <a href="tel:+905346682445" className="text-accent font-bold hover:text-white transition text-2xl w-max tracking-tight">0534 668 24 45</a>
              <a href="https://wa.me/905346682445" target="_blank" rel="noopener noreferrer" className="text-surface/80 hover:text-white transition w-max">WhatsApp hattı</a>
-             <div className="mt-4 text-surface/60 text-sm">
-               Pzt - Cmt | 08:00 - 20:00
+             <div className="mt-4 text-surface/60 text-sm leading-relaxed">
+               <p>{HOURS.weekLabel} · {HOURS.weekTime}</p>
+               <p>{HOURS.sundayLabel}: {HOURS.sundayText}</p>
              </div>
            </div>
         </div>

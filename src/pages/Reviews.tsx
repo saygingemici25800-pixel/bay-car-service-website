@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
+import { MAPS } from '../lib/site'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -41,7 +42,7 @@ export default function Reviews() {
             <p className="text-mute mb-10 text-lg leading-relaxed max-w-xl mx-auto">
                Google'da bizi değerlendiren müşterilerimize teşekkür ederiz. Yorumları görmek ve kendi deneyiminizi paylaşmak için:
             </p>
-            <a href="https://www.google.com/maps/search/Bay+Car+Service+Fethiye+Taşyaka" target="_blank" rel="noopener noreferrer" className="inline-block bg-accent text-surface px-8 py-4 rounded-xl font-bold hover:scale-105 hover:bg-ink transition shadow-xl">
+            <a href={MAPS.business} target="_blank" rel="noopener noreferrer" className="inline-block bg-accent text-surface px-8 py-4 rounded-xl font-bold hover:scale-105 hover:bg-ink transition shadow-xl">
                Google'da yorumları gör
             </a>
          </motion.div>
