@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
+import TreatedImage from '../components/TreatedImage'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -61,18 +62,19 @@ export default function About() {
              </div>
            </motion.div>
            
-           <motion.div 
-             {...fadeInUp} transition={{ duration: 0.6, delay: 0.2 }}
-             className="w-full flex justify-center md:justify-end"
-           >
-              <div className="border border-ink/10 rounded-2xl p-2 w-full md:w-4/5 aspect-[4/5] bg-white flex items-center justify-center relative overflow-hidden group">
-                 <div className="text-center px-6 relative z-10">
-                   <svg className="w-12 h-12 text-mute mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                   <p className="text-mute font-medium text-sm border border-ink/10 px-4 py-2 rounded-full inline-block">Bayram Usta, atölyede. Fotoğraf yakında.</p>
-                 </div>
-                 <div className="absolute inset-0 bg-ink/[0.02] group-hover:bg-transparent transition duration-500 pointer-events-none" />
-              </div>
-           </motion.div>
+           {/* workshop-wall — asimetrik, kolonun dışına taşar, hafif eğik */}
+           <div className="w-full flex justify-center md:justify-end">
+              <TreatedImage
+                src="/images/workshop-wall.webp"
+                alt="Bay Car atölyesi — alet duvarı ve tezgah"
+                width={1400}
+                height={933}
+                rotate={-2}
+                delay={0.15}
+                rounded="rounded-2xl"
+                className="w-[85%] sm:w-4/5 md:w-[112%] md:-mr-6 lg:-mr-16 shadow-xl"
+              />
+           </div>
         </div>
       </section>
 
@@ -130,6 +132,20 @@ export default function About() {
                 </div>
               </motion.div>
            </div>
+        </div>
+      </section>
+
+      {/* Alt: garage-vintage — sola kayık, küçük, bol boşluk */}
+      <section className="pb-28 bg-surface w-full">
+        <div className="max-w-7xl mx-auto px-6 flex justify-center md:justify-start">
+          <TreatedImage
+            src="/images/garage-vintage.webp"
+            alt="Vintage garaj atmosferi — atölyeden bir köşe"
+            width={1000}
+            height={1777}
+            rotate={2}
+            className="w-[68%] sm:w-[40%] md:w-[22%] max-w-[260px] shadow-xl"
+          />
         </div>
       </section>
 

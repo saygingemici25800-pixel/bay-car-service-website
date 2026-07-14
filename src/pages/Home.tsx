@@ -7,6 +7,7 @@ import { businessSchema } from '../lib/seo'
 import { YEARS_EXPERIENCE } from '../lib/site'
 import { useIsDesktop } from '../hooks/useIsDesktop'
 import StatsSection from '../components/StatsSection'
+import TreatedImage from '../components/TreatedImage'
 
 // three.js ağır bir chunk — sadece desktop'ta ve talep üzerine indirilsin.
 const HeroScene = lazy(() => import('../components/HeroScene'))
@@ -239,18 +240,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Asimetrik foto — sağa kayık, küçük; desktop'ta Stats bölümüne hafif taşar */}
+      <div className="w-full bg-surface relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-center md:justify-end">
+          <TreatedImage
+            src="/images/car-detail.webp"
+            alt="Atölyeden araç detayı, muted ton"
+            width={1000}
+            height={1500}
+            rotate={2}
+            className="w-[78%] sm:w-[44%] md:w-[26%] max-w-[280px] md:-mb-24 shadow-xl"
+          />
+        </div>
+      </div>
+
       <StatsSection />
 
       {/* 2. BRAND GRID SECTION */}
-      <section id="brands" className="py-24 bg-surface max-w-7xl mx-auto px-6 w-full">
-        <motion.div {...fadeInUp}>
+      <section id="brands" className="py-24 bg-surface max-w-7xl mx-auto px-6 w-full relative">
+        {/* engine-bay — sola kayık, grid dışına taşar; içerik z-10 üstte, yazı okunur kalır */}
+        <TreatedImage
+          src="/images/engine-bay.webp"
+          alt="Modern motor bölmesi, temiz ve koyu"
+          width={1400}
+          height={1044}
+          rotate={-1.5}
+          className="hidden md:block absolute top-32 -left-6 lg:-left-20 w-[38%] max-w-[480px] z-0 shadow-2xl"
+        />
+        <motion.div {...fadeInUp} className="relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-ink leading-[0.95]" style={{ fontFamily: 'var(--font-display)' }}>
              Beş marka.<br/>
              <span className="text-mute italic font-normal text-3xl md:text-4xl">Tek uzmanlık.</span>
           </h2>
         </motion.div>
-        
-        <motion.div variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-50px" }} className="grid grid-cols-2 md:grid-cols-5 gap-4">
+
+        <motion.div variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-50px" }} className="grid grid-cols-2 md:grid-cols-5 gap-4 relative z-10">
           {Object.values(brands).map((brand) => (
             <Link to={`/servisler/${brand.slug}`} key={brand.slug} className="group/brand">
               <motion.div 
@@ -272,8 +296,18 @@ export default function Home() {
       </section>
 
       {/* 3. WHY US SECTION */}
-      <section id="why-us" className="py-24 bg-ink text-surface w-full">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-16 md:gap-8">
+      <section id="why-us" className="py-24 bg-ink text-surface w-full relative overflow-hidden">
+        {/* tools-dark — dekoratif, sağ üst köşe; koyu bg ile kaynaşır, yazıyı ezmez */}
+        <TreatedImage
+          src="/images/tools-dark.webp"
+          alt="Karanlık atölyede aletler"
+          width={1400}
+          height={933}
+          overlay={false}
+          rounded="rounded-none"
+          className="hidden md:block absolute top-0 right-0 w-[30%] max-w-[380px] opacity-70 z-0"
+        />
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-16 md:gap-8 relative z-10">
           <motion.div {...fadeInUp} className="md:w-1/3">
             <h2 className="text-4xl md:text-5xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
               Neden Bay Car?

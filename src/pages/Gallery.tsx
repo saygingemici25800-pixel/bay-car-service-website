@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
+import TreatedImage from '../components/TreatedImage'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -9,24 +10,27 @@ const fadeInUp = {
 }
 
 export default function Gallery() {
-  const galleryItems = [
-    { aspect: "aspect-square" },
-    { aspect: "aspect-[4/5] md:col-span-2 md:row-span-2" },
-    { aspect: "aspect-[3/4]" },
-    { aspect: "aspect-square" },
-    { aspect: "aspect-[16/9] md:col-span-2" },
-    { aspect: "aspect-[4/5]" },
-    { aspect: "aspect-square" },
-    { aspect: "aspect-[16/9] md:col-span-2" },
-    { aspect: "aspect-[3/4] md:row-span-2" },
-    { aspect: "aspect-square" },
-    { aspect: "aspect-[4/5]" },
-    { aspect: "aspect-square" },
-  ];
-
-  /* 
-    Bayram Usta'dan gerçek fotoğraflar geldiğinde değiştirilecek 
+  /*
+    Gerçek fotoğraflar (5 adet) + kalan "Fotoğraf yakında" placeholder'lar.
+    Grid'e hizalı DEĞİL: masonry (CSS columns) + kayık genişlikler + hafif eğim.
+    Bayram Usta'dan yeni fotoğraflar geldikçe placeholder'lar dolacak.
   */
+  type GalleryItem =
+    | { kind: 'photo'; src: string; alt: string; w: number; h: number; cls: string; rot: number }
+    | { kind: 'ph'; cls: string; aspect: string }
+
+  const galleryItems: GalleryItem[] = [
+    { kind: 'photo', src: '/images/engine-bay.webp', alt: 'Atölyeden modern motor bölmesi', w: 1400, h: 1044, cls: 'w-full', rot: 1 },
+    { kind: 'ph', cls: 'w-[64%] ml-auto', aspect: 'aspect-square' },
+    { kind: 'photo', src: '/images/car-detail.webp', alt: 'Araç detayı, muted ton', w: 1000, h: 1500, cls: 'w-[80%] ml-auto', rot: -2 },
+    { kind: 'photo', src: '/images/tools-dark.webp', alt: 'Karanlık atölyede aletler', w: 1400, h: 933, cls: 'w-[88%] mr-auto', rot: 1.5 },
+    { kind: 'ph', cls: 'w-[82%]', aspect: 'aspect-[4/3]' },
+    { kind: 'photo', src: '/images/workshop-wall.webp', alt: 'Atölye duvarı, alet askısı', w: 1400, h: 933, cls: 'w-[92%] mr-auto', rot: -1 },
+    { kind: 'ph', cls: 'w-[52%] ml-auto', aspect: 'aspect-[3/4]' },
+    { kind: 'photo', src: '/images/garage-vintage.webp', alt: 'Vintage garaj atmosferi', w: 1000, h: 1777, cls: 'w-[62%]', rot: 2 },
+    { kind: 'ph', cls: 'w-[74%] mr-auto', aspect: 'aspect-square' },
+    { kind: 'ph', cls: 'w-[58%] ml-auto', aspect: 'aspect-[4/5]' },
+  ];
 
   return (
     <motion.div
@@ -56,22 +60,37 @@ export default function Gallery() {
          </motion.p>
       </section>
 
-      {/* Grid */}
-      <section className="pb-24 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[200px] gap-4 md:gap-6">
-          {galleryItems.map((item, index) => (
-            <motion.div 
-               key={index}
-               initial={{ opacity: 0, scale: 0.95 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-               className={`bg-ink/5 border border-ink/5 rounded-2xl flex items-center justify-center group overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 w-full h-full p-6 text-center ${item.aspect}`}
-            >
-               {/* Stand-in element */}
-               <span className="text-mute font-medium text-sm group-hover:text-ink transition duration-300">Fotoğraf yakında</span>
-            </motion.div>
-          ))}
+      {/* Masonry — hizalı değil, kayık, bol boşluk */}
+      <section className="pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-10">
+          {galleryItems.map((item, index) =>
+            item.kind === 'photo' ? (
+              <div key={index} className="break-inside-avoid mb-6 md:mb-10">
+                <TreatedImage
+                  src={item.src}
+                  alt={item.alt}
+                  width={item.w}
+                  height={item.h}
+                  rotate={item.rot}
+                  delay={(index % 3) * 0.15}
+                  rounded="rounded-2xl"
+                  className={`${item.cls} shadow-lg`}
+                />
+              </div>
+            ) : (
+              <div key={index} className="break-inside-avoid mb-6 md:mb-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 40, scale: 1.04 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.15 }}
+                  className={`bg-ink/5 border border-ink/5 rounded-2xl flex items-center justify-center p-6 text-center ${item.cls} ${item.aspect}`}
+                >
+                  <span className="text-mute font-medium text-sm">Fotoğraf yakında</span>
+                </motion.div>
+              </div>
+            )
+          )}
         </div>
       </section>
 
